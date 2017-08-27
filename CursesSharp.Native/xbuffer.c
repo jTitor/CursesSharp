@@ -32,7 +32,7 @@ xbuf_init_priv(xbuffer* xb, void* prealloc, size_t maxlen, unsigned opts)
 		return -1;
 	}
 
-	xb->buf = prealloc;
+	xb->buf = (char*)prealloc;
 	xb->bufend = xb->buf;
 	xb->bufcap = xb->buf + maxlen;
 	xb->opts = opts & 0xFF;
@@ -102,7 +102,7 @@ xbuf_reserve(xbuffer* xb, size_t maxlen)
 	assert(length <= newcapacity);
 
 	newbuf = xbuf_isoptset(xb, XBUF_OWN) ? xb->buf : 0;
-	newbuf = realloc(newbuf, newcapacity);
+	newbuf = (char*)realloc(newbuf, newcapacity);
 	if (!newbuf)
 		return -1;
 	if (!xbuf_isoptset(xb, XBUF_OWN))

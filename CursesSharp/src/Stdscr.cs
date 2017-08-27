@@ -2,9 +2,9 @@
 
 /*
  * CursesSharp
- * 
+ *
  * Copyright 2009 Robert Konklewski
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or (at your
@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #endregion
@@ -147,11 +147,11 @@ namespace CursesSharp
             Curses.StdScr.Add(y, x, str);
         }
 
-		public static void Add (string format, params object [] args)
-		{
-			var formattedString = string.Format (format, args);
-			Curses.StdScr.Add(formattedString);
-		}
+        public static void Add(string format, params object[] args)
+        {
+            var formattedString = string.Format(format, args);
+            Curses.StdScr.Add(formattedString);
+        }
 
         public static void EchoChar(char ch)
         {
@@ -360,9 +360,9 @@ namespace CursesSharp
             Curses.StdScr.SetScrollRegion(top, bot);
         }
 
-		/// <summary>
-		/// refresh() is equivalent to wrefresh(stdscr)
-		/// </summary>
+        /// <summary>
+        /// refresh() is equivalent to wrefresh(stdscr)
+        /// </summary>
         public static void Refresh()
         {
             Curses.StdScr.Refresh();

@@ -30,38 +30,41 @@ namespace CursesSharp.Internal
     {
         internal static int LINES()
         {
-            return wrap_LINES();
+            return NativeMethods.WRAP_LINES();
         }
 
         internal static int COLS()
         {
-            return wrap_COLS();
+            return NativeMethods.WRAP_COLS();
         }
 
         internal static int COLORS()
         {
-            return wrap_COLORS();
+            return NativeMethods.WRAP_COLORS();
         }
 
         internal static int COLOR_PAIRS()
         {
-            return wrap_COLOR_PAIRS();
+            return NativeMethods.WRAP_COLOR_PAIRS();
         }
 
         internal static int TABSIZE()
         {
-            return wrap_TABSIZE();
+            return NativeMethods.WRAP_TABSIZE();
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_LINES();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_COLS();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_COLORS();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_COLOR_PAIRS();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_TABSIZE();
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_LINES();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_COLS();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_COLORS();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_COLOR_PAIRS();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_TABSIZE();
     }
 }

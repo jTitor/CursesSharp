@@ -22,13 +22,13 @@
 
 
 WRAP_API int
-wrap_wdelch(WINDOW *win)
+WRAP_wdelch(WINDOW *win)
 {
 	return wdelch(win);
 }
 
 WRAP_API int
-wrap_mvwdelch(WINDOW *win, int y, int x)
+WRAP_mvwdelch(WINDOW *win, int y, int x)
 {
 	return mvwdelch(win, y, x);
 }

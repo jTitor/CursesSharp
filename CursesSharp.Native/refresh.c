@@ -22,31 +22,31 @@
 
 
 WRAP_API int
-wrap_wrefresh(WINDOW *win)
+WRAP_wrefresh(WINDOW *win)
 {
 	return wrefresh(win);
 }
 
 WRAP_API int
-wrap_wnoutrefresh(WINDOW *win)
+WRAP_wnoutrefresh(WINDOW *win)
 {
 	return wnoutrefresh(win);
 }
 
 WRAP_API int
-wrap_doupdate(void)
+WRAP_doupdate(void)
 {
 	return doupdate();
 }
 
 WRAP_API int
-wrap_redrawwin(WINDOW *win)
+WRAP_redrawwin(WINDOW *win)
 {
 	return redrawwin(win);
 }
 
 WRAP_API int
-wrap_wredrawln(WINDOW *win, int beg_line, int num_lines)
+WRAP_wredrawln(WINDOW *win, int beg_line, int num_lines)
 {
 	return wredrawln(win, beg_line, num_lines);
 }

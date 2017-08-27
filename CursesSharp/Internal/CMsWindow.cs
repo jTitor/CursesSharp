@@ -1,9 +1,9 @@
 #region Copyright 2009 Robert Konklewski
 /*
  * CursesSharp
- * 
+ *
  * Copyright 2009 Robert Konklewski
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or (at your
@@ -16,7 +16,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * www.gnu.org/licenses/>.
- * 
+ *
  */
 #endregion
 
@@ -25,123 +25,126 @@ using System.Runtime.InteropServices;
 
 namespace CursesSharp.Internal
 {
-    static partial class CursesMethods
+    internal static partial class CursesMethods
     {
-		internal static IntPtr stdscr()
-		{
-			IntPtr ret = wrap_stdscr();
-			InternalException.Verify(ret, "stdscr");
-			return ret;
-		}
+        internal static IntPtr stdscr()
+        {
+            IntPtr ret = NativeMethods.WRAP_stdscr();
+            InternalException.Verify(ret, "stdscr");
+            return ret;
+        }
 
-		internal static IntPtr curscr()
-		{
-			IntPtr ret = wrap_curscr();
-			InternalException.Verify(ret, "curscr");
-			return ret;
-		}
+        internal static IntPtr curscr()
+        {
+            IntPtr ret = NativeMethods.WRAP_curscr();
+            InternalException.Verify(ret, "curscr");
+            return ret;
+        }
 
-		internal static IntPtr newscr()
-		{
-			IntPtr ret = wrap_newscr();
-			InternalException.Verify(ret, "newscr");
-			return ret;
-		}
+        internal static IntPtr newscr()
+        {
+            IntPtr ret = NativeMethods.WRAP_newscr();
+            InternalException.Verify(ret, "newscr");
+            return ret;
+        }
 
         internal static IntPtr newwin(int nlines, int ncols, int begy, int begx)
         {
-            IntPtr ret = wrap_newwin(nlines, ncols, begy, begx);
+            IntPtr ret = NativeMethods.WRAP_newwin(nlines, ncols, begy, begx);
             InternalException.Verify(ret, "newwin");
             return ret;
         }
 
         internal static IntPtr derwin(IntPtr orig, int nlines, int ncols, int begy, int begx)
         {
-            IntPtr ret = wrap_derwin(orig, nlines, ncols, begy, begx);
+            IntPtr ret = NativeMethods.WRAP_derwin(orig, nlines, ncols, begy, begx);
             InternalException.Verify(ret, "derwin");
             return ret;
         }
 
         internal static IntPtr subwin(IntPtr orig, int nlines, int ncols, int begy, int begx)
         {
-            IntPtr ret = wrap_subwin(orig, nlines, ncols, begy, begx);
+            IntPtr ret = NativeMethods.WRAP_subwin(orig, nlines, ncols, begy, begx);
             InternalException.Verify(ret, "subwin");
             return ret;
         }
 
         internal static IntPtr dupwin(IntPtr win)
         {
-            IntPtr ret = wrap_dupwin(win);
+            IntPtr ret = NativeMethods.WRAP_dupwin(win);
             InternalException.Verify(ret, "dupwin");
             return ret;
         }
 
         internal static void delwin(IntPtr win)
         {
-            int ret = wrap_delwin(win);
+            int ret = NativeMethods.WRAP_delwin(win);
             InternalException.Verify(ret, "delwin");
         }
 
         internal static void mvwin(IntPtr win, int y, int x)
         {
-            int ret = wrap_mvwin(win, y, x);
+            int ret = NativeMethods.WRAP_mvwin(win, y, x);
             InternalException.Verify(ret, "mvwin");
         }
 
         internal static void mvderwin(IntPtr win, int pary, int parx)
         {
-            int ret = wrap_mvderwin(win, pary, parx);
+            int ret = NativeMethods.WRAP_mvderwin(win, pary, parx);
             InternalException.Verify(ret, "mvderwin");
         }
 
         internal static void syncok(IntPtr win, bool bf)
         {
-            int ret = wrap_syncok(win, bf);
+            int ret = NativeMethods.WRAP_syncok(win, bf);
             InternalException.Verify(ret, "syncok");
         }
 
         internal static void wsyncup(IntPtr win)
         {
-            wrap_wsyncup(win);
+            NativeMethods.WRAP_wsyncup(win);
         }
 
         internal static void wcursyncup(IntPtr win)
         {
-            wrap_wcursyncup(win);
+            NativeMethods.WRAP_wcursyncup(win);
         }
 
         internal static void wsyncdown(IntPtr win)
         {
-            wrap_wsyncdown(win);
+            NativeMethods.WRAP_wsyncdown(win);
         }
+    }
 
-		[DllImport("CursesWrapper")]
-		private static extern IntPtr wrap_stdscr();
-		[DllImport("CursesWrapper")]
-		private static extern IntPtr wrap_curscr();
-		[DllImport("CursesWrapper")]
-		private static extern IntPtr wrap_newscr();
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_newwin(int nlines, int ncols, int begy, int begx);
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_derwin(IntPtr orig, int nlines, int ncols, int begy, int begx);
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_subwin(IntPtr orig, int nlines, int ncols, int begy, int begx);
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_dupwin(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_delwin(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_mvwin(IntPtr win, int y, int x);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_mvderwin(IntPtr win, int pary, int parx);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_syncok(IntPtr win, Boolean bf);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_wsyncup(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_wcursyncup(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_wsyncdown(IntPtr win);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_stdscr();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_curscr();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_newscr();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_newwin(int nlines, int ncols, int begy, int begx);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_derwin(IntPtr orig, int nlines, int ncols, int begy, int begx);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_subwin(IntPtr orig, int nlines, int ncols, int begy, int begx);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_dupwin(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_delwin(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_mvwin(IntPtr win, int y, int x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_mvderwin(IntPtr win, int pary, int parx);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_syncok(IntPtr win, Boolean bf);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_wsyncup(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_wcursyncup(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_wsyncdown(IntPtr win);
     }
 }

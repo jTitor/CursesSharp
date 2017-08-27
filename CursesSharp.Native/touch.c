@@ -22,37 +22,37 @@
 
 
 WRAP_API int
-wrap_touchwin(WINDOW *win)
+WRAP_touchwin(WINDOW *win)
 {
 	return touchwin(win);
 }
 
 WRAP_API int
-wrap_touchline(WINDOW *win, int start, int count)
+WRAP_touchline(WINDOW *win, int start, int count)
 {
 	return touchline(win, start, count);
 }
 
 WRAP_API int
-wrap_untouchwin(WINDOW *win)
+WRAP_untouchwin(WINDOW *win)
 {
 	return untouchwin(win);
 }
 
 WRAP_API int
-wrap_wtouchln(WINDOW *win, int y, int n, int changed)
+WRAP_wtouchln(WINDOW *win, int y, int n, int changed)
 {
 	return wtouchln(win, y, n, changed);
 }
 
 WRAP_API int
-wrap_is_linetouched(WINDOW *win, int line)
+WRAP_is_linetouched(WINDOW *win, int line)
 {
 	return is_linetouched(win, line);
 }
 
 WRAP_API int
-wrap_is_wintouched(WINDOW *win)
+WRAP_is_wintouched(WINDOW *win)
 {
 	return is_wintouched(win);
 }

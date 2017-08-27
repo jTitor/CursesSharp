@@ -22,49 +22,49 @@
 
 
 WRAP_API int 
-wrap_baudrate(void)
+WRAP_baudrate(void)
 {
 	return baudrate();
 }
 
 WRAP_API char 
-wrap_erasechar(void)
+WRAP_erasechar(void)
 {
 	return erasechar();
 }
 
 WRAP_API char 
-wrap_killchar(void)
+WRAP_killchar(void)
 {
 	return killchar();
 }
 
 WRAP_API unsigned int
-wrap_termattrs(void)
+WRAP_termattrs(void)
 {
 	return termattrs();
 }
 
 WRAP_API int
-wrap_has_ic(void)
+WRAP_has_ic(void)
 {
 	return has_ic();
 }
 
 WRAP_API int
-wrap_has_il(void)
+WRAP_has_il(void)
 {
 	return has_il();
 }
 
 WRAP_API const char *
-wrap_termname(void)
+WRAP_termname(void)
 {
 	return termname();
 }
 
 WRAP_API const char *
-wrap_longname(void)
+WRAP_longname(void)
 {
 	return longname();
 }

@@ -2,9 +2,9 @@
 
 /*
  * CursesSharp
- * 
+ *
  * Copyright 2009 Robert Konklewski
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or (at your
@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #endregion
@@ -61,24 +61,40 @@ namespace CursesSharp
 
         #region IDisposable Members
 
+        /// <summary>
+        ///
+        /// </summary>
         public void Dispose()
         {
-            this.DisposeImpl(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        #endregion
-
+        /// <summary>
+        ///
+        /// </summary>
         ~Panel()
         {
-#if DEBUG
-            Debug.Assert(this.handle == IntPtr.Zero, "Panel not disposed");
-#endif
-            this.DisposeImpl(false);
+            // Finalizer calls Dispose(false)
+            this.Dispose(false);
         }
 
-        private void DisposeImpl(bool disposing)
+        /// <summary>
+        /// The bulk of the clean-up code is implemented in Dispose(bool)
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                // free managed resources
+                if (this.window != null)
+                {
+                    this.window.Dispose();
+                    this.window = null;
+                }
+            }
+            // free native resources if there are any.
             if (this.handle != IntPtr.Zero)
             {
                 if (disposing)
@@ -87,9 +103,10 @@ namespace CursesSharp
                 }
                 CursesMethods.del_panel(this.handle);
                 this.handle = IntPtr.Zero;
-                this.window = null;
             }
         }
+
+        #endregion
 
         public Window Window
         {

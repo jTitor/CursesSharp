@@ -29,65 +29,68 @@ namespace CursesSharp.Internal
     {
         internal static int baudrate()
         {
-            int ret = wrap_baudrate();
+            int ret = NativeMethods.WRAP_baudrate();
             InternalException.Verify(ret, "baudrate");
             return ret;
         }
 
         internal static char erasechar()
         {
-            return wrap_erasechar();
+            return NativeMethods.WRAP_erasechar();
         }
 
         internal static char killchar()
         {
-            return wrap_killchar();
+            return NativeMethods.WRAP_killchar();
         }
 
         internal static uint termattrs()
         {
-            return wrap_termattrs();
+            return NativeMethods.WRAP_termattrs();
         }
 
         internal static bool has_ic()
         {
-            return wrap_has_ic();
+            return NativeMethods.WRAP_has_ic();
         }
 
         internal static bool has_il()
         {
-            return wrap_has_il();
+            return NativeMethods.WRAP_has_il();
         }
 
         internal static string termname()
         {
-            IntPtr ret = wrap_termname();
+            IntPtr ret = NativeMethods.WRAP_termname();
             InternalException.Verify(ret, "termname");
             return Marshal.PtrToStringAnsi(ret);
         }
 
         internal static string longname()
         {
-            IntPtr ret = wrap_longname();
+            IntPtr ret = NativeMethods.WRAP_longname();
             InternalException.Verify(ret, "longname");
             return Marshal.PtrToStringAnsi(ret);
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_baudrate();
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern char wrap_erasechar();
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern char wrap_killchar();
-        [DllImport("CursesWrapper")]
-        private static extern uint wrap_termattrs();
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_has_ic();
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_has_il();
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_termname();
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_longname();
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_baudrate();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        internal static extern char WRAP_erasechar();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        internal static extern char WRAP_killchar();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint WRAP_termattrs();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_has_ic();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_has_il();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_termname();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_longname();
     }
 }

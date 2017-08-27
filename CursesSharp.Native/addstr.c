@@ -24,7 +24,7 @@
 
 
 WRAP_API int
-wrap_waddnstr(WINDOW *win, uchar2 *str, int n)
+WRAP_waddnstr(WINDOW *win, uchar2 *str, int n)
 {
 #if defined(CURSES_WIDE) && SIZEOF_WCHAR_T == 2
 	return waddnwstr(win, str, n);
@@ -68,7 +68,7 @@ do_exit:
 }
 
 WRAP_API int
-wrap_mvwaddnstr(WINDOW *win, int y, int x, uchar2 *str, int n)
+WRAP_mvwaddnstr(WINDOW *win, int y, int x, uchar2 *str, int n)
 {
 #if defined(CURSES_WIDE) && SIZEOF_WCHAR_T == 2
 	return mvwaddnwstr(win, y, x, str, n);

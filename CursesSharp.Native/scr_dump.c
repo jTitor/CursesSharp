@@ -22,25 +22,25 @@
 
 
 WRAP_API int 
-wrap_scr_dump(char *filename)
+WRAP_scr_dump(char *filename)
 {
 	return scr_dump(filename);
 }
 
 WRAP_API int 
-wrap_scr_init(char *filename)
+WRAP_scr_init(char *filename)
 {
 	return scr_init(filename);
 }
 
 WRAP_API int 
-wrap_scr_restore(char *filename)
+WRAP_scr_restore(char *filename)
 {
 	return scr_restore(filename);
 }
 
 WRAP_API int 
-wrap_scr_set(char *filename)
+WRAP_scr_set(char *filename)
 {
 	return scr_set(filename);
 }

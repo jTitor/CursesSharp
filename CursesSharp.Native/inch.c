@@ -22,13 +22,13 @@
 
 
 WRAP_API unsigned int 
-wrap_winch(WINDOW *win)
+WRAP_winch(WINDOW *win)
 {
 	return winch(win);
 }
 
 WRAP_API unsigned int 
-wrap_mvwinch(WINDOW *win, int y, int x)
+WRAP_mvwinch(WINDOW *win, int y, int x)
 {
 	return mvwinch(win, y, x);
 }

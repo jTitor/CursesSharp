@@ -24,13 +24,13 @@
 
 
 WRAP_API int 
-wrap_slk_init(int fmt)
+WRAP_slk_init(int fmt)
 {
 	return slk_init(fmt);
 }
 
 WRAP_API int 
-wrap_slk_set(int labnum, uchar2 *label, int labellen, int justify)
+WRAP_slk_set(int labnum, uchar2 *label, int labellen, int justify)
 {
 #if defined(CURSES_WIDE) && SIZEOF_WCHAR_T == 2
 	return slk_wset(labnum, label, justify);
@@ -74,61 +74,61 @@ do_exit:
 }
 
 WRAP_API int 
-wrap_slk_refresh(void)
+WRAP_slk_refresh(void)
 {
 	return slk_refresh();
 }
 
 WRAP_API int 
-wrap_slk_noutrefresh(void)
+WRAP_slk_noutrefresh(void)
 {
 	return slk_noutrefresh();
 }
 
 WRAP_API const char *
-wrap_slk_label(int labnum)
+WRAP_slk_label(int labnum)
 {
 	return slk_label(labnum);
 }
 
 WRAP_API int 
-wrap_slk_clear(void)
+WRAP_slk_clear(void)
 {
 	return slk_clear();
 }
 
 WRAP_API int 
-wrap_slk_restore(void)
+WRAP_slk_restore(void)
 {
 	return slk_restore();
 }
 
 WRAP_API int 
-wrap_slk_touch(void)
+WRAP_slk_touch(void)
 {
 	return slk_touch();
 }
 
 WRAP_API int 
-wrap_slk_attron(unsigned int attrs)
+WRAP_slk_attron(unsigned int attrs)
 {
 	return slk_attron(attrs);
 }
 
 WRAP_API int 
-wrap_slk_attrset(unsigned int attrs)
+WRAP_slk_attrset(unsigned int attrs)
 {
 	return slk_attrset(attrs);
 }
 
 WRAP_API int 
-wrap_slk_attroff(unsigned int attrs)
+WRAP_slk_attroff(unsigned int attrs)
 {
 	return slk_attroff(attrs);
 }
 
 WRAP_API int 
-wrap_slk_color(short color_pair)
+WRAP_slk_color(short color_pair)
 {
 	return slk_color(color_pair);
 }

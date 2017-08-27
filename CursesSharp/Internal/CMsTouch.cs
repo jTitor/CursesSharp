@@ -29,49 +29,52 @@ namespace CursesSharp.Internal
     {
         internal static void touchwin(IntPtr win)
         {
-            int ret = wrap_touchwin(win);
+            int ret = NativeMethods.WRAP_touchwin(win);
             InternalException.Verify(ret, "touchwin");
         }
 
         internal static void touchline(IntPtr win, int start, int count)
         {
-            int ret = wrap_touchline(win, start, count);
+            int ret = NativeMethods.WRAP_touchline(win, start, count);
             InternalException.Verify(ret, "touchline");
         }
 
         internal static void untouchwin(IntPtr win)
         {
-            int ret = wrap_untouchwin(win);
+            int ret = NativeMethods.WRAP_untouchwin(win);
             InternalException.Verify(ret, "untouchwin");
         }
 
         internal static void wtouchln(IntPtr win, int y, int n, int changed)
         {
-            int ret = wrap_wtouchln(win, y, n, changed);
+            int ret = NativeMethods.WRAP_wtouchln(win, y, n, changed);
             InternalException.Verify(ret, "wtouchln");
         }
 
         internal static bool is_linetouched(IntPtr win, int line)
         {
-            return wrap_is_linetouched(win, line);
+            return NativeMethods.WRAP_is_linetouched(win, line);
         }
 
         internal static bool is_wintouched(IntPtr win)
         {
-            return wrap_is_wintouched(win);
+            return NativeMethods.WRAP_is_wintouched(win);
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_touchwin(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_touchline(IntPtr win, int start, int count);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_untouchwin(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wtouchln(IntPtr win, int y, int n, int changed);
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_is_linetouched(IntPtr win, int line);
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_is_wintouched(IntPtr win);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_touchwin(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_touchline(IntPtr win, int start, int count);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_untouchwin(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wtouchln(IntPtr win, int y, int n, int changed);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_is_linetouched(IntPtr win, int line);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_is_wintouched(IntPtr win);
     }
 }

@@ -24,29 +24,54 @@ using System;
 
 namespace CursesSharp.Internal
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    [Serializable]
     internal class InternalException : CursesException
     {
+        /// <summary>
+        /// 
+        /// </summary>
         internal InternalException()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         internal InternalException(string message)
             : base(message)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="inner"></param>
         internal InternalException(string message, Exception inner)
             : base(message, inner)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="fname"></param>
         internal static void Verify(int result, string fname)
         {
             if (result == -1)
-
-				throw new InternalException(fname + "() returned ERR");
+                throw new InternalException(fname + "() returned ERR");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="fname"></param>
         internal static void Verify(IntPtr result, string fname)
         {
             if (result == IntPtr.Zero)

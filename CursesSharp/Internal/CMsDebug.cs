@@ -29,17 +29,20 @@ namespace CursesSharp.Internal
     {
         internal static void traceon()
         {
-            wrap_traceon();
+            NativeMethods.WRAP_traceon();
         }
 
         internal static void traceoff()
         {
-            wrap_traceoff();
+            NativeMethods.WRAP_traceoff();
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_traceon();
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_traceoff();
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_traceon();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_traceoff();
     }
 }

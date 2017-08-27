@@ -22,43 +22,43 @@
 
 
 WRAP_API int
-wrap_clearok(WINDOW *win, int bf)
+WRAP_clearok(WINDOW *win, int bf)
 {
 	return clearok(win, (bool)bf);
 }
 
 WRAP_API int
-wrap_idlok(WINDOW *win, int bf)
+WRAP_idlok(WINDOW *win, int bf)
 {
 	return idlok(win, (bool)bf);
 }
 
 WRAP_API void
-wrap_idcok(WINDOW *win, int bf)
+WRAP_idcok(WINDOW *win, int bf)
 {
 	idcok(win, (bool)bf);
 }
 
 WRAP_API void
-wrap_immedok(WINDOW *win, int bf)
+WRAP_immedok(WINDOW *win, int bf)
 {
 	immedok(win, (bool)bf);
 }
 
 WRAP_API int
-wrap_leaveok(WINDOW *win, int bf)
+WRAP_leaveok(WINDOW *win, int bf)
 {
 	return leaveok(win, (bool)bf);
 }
 
 WRAP_API int
-wrap_wsetscrreg(WINDOW *win, int top, int bot)
+WRAP_wsetscrreg(WINDOW *win, int top, int bot)
 {
 	return wsetscrreg(win, top, bot);
 }
 
 WRAP_API int
-wrap_scrollok(WINDOW *win, int bf)
+WRAP_scrollok(WINDOW *win, int bf)
 {
 	return scrollok(win, (bool)bf);
 }

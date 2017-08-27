@@ -22,25 +22,25 @@
 
 
 WRAP_API WINDOW *
-wrap_initscr(void)
+WRAP_initscr(void)
 {
 	return initscr();
 }
 
 WRAP_API int
-wrap_endwin(void)
+WRAP_endwin(void)
 {
 	return endwin();
 }
 
 WRAP_API int
-wrap_isendwin(void)
+WRAP_isendwin(void)
 {
 	return isendwin();
 }
 
 WRAP_API int
-wrap_resize_term(int nlines, int ncols)
+WRAP_resize_term(int nlines, int ncols)
 {
 	return resize_term(nlines, ncols);
 }

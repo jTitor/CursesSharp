@@ -29,19 +29,22 @@ namespace CursesSharp.Internal
     {
         internal static void scroll(IntPtr win)
         {
-            int ret = wrap_scroll(win);
+            int ret = NativeMethods.WRAP_scroll(win);
             InternalException.Verify(ret, "scroll");
         }
 
         internal static void wscrl(IntPtr win, int n)
         {
-            int ret = wrap_wscrl(win, n);
+            int ret = NativeMethods.WRAP_wscrl(win, n);
             InternalException.Verify(ret, "wscrl");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_scroll(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wscrl(IntPtr win, int n);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_scroll(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wscrl(IntPtr win, int n);
     }
 }

@@ -29,21 +29,24 @@ namespace CursesSharp.Internal
     {
         internal static uint winch(IntPtr win)
         {
-            uint ret = wrap_winch(win);
+            uint ret = NativeMethods.WRAP_winch(win);
             InternalException.Verify((int)ret, "winch");
             return ret;
         }
 
         internal static uint mvwinch(IntPtr win, int y, int x)
         {
-            uint ret = wrap_mvwinch(win, y, x);
+            uint ret = NativeMethods.WRAP_mvwinch(win, y, x);
             InternalException.Verify((int)ret, "mvwinch");
             return ret;
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        internal static extern uint wrap_winch(IntPtr win);
-        [DllImport("CursesWrapper")]
-        internal static extern uint wrap_mvwinch(IntPtr win, int y, int x);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint WRAP_winch(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint WRAP_mvwinch(IntPtr win, int y, int x);
     }
 }

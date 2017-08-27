@@ -29,11 +29,14 @@ namespace CursesSharp.Internal
     {
         internal static void wmove(IntPtr win, int y, int x)
         {
-            int ret = wrap_wmove(win, y, x);
+            int ret = NativeMethods.WRAP_wmove(win, y, x);
             InternalException.Verify(ret, "wmove");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wmove(IntPtr win, int y, int x);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wmove(IntPtr win, int y, int x);
     }
 }

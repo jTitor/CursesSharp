@@ -1,8 +1,8 @@
 /*
  * CursesSharp
- * 
+ *
  * Copyright 2009 Robert Konklewski
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or (at your
@@ -15,92 +15,94 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #include "wrapper.h"
 
+
 WRAP_API WINDOW *
-wrap_stdscr()
+WRAP_stdscr()
 {
 	return stdscr;
 }
 
 WRAP_API WINDOW *
-wrap_curscr()
+WRAP_curscr()
 {
 	return curscr;
 }
 
+/*
 WRAP_API WINDOW *
-wrap_newscr()
+WRAP_newscr()
 {
 	return newscr;
 }
-
+ */
 
 WRAP_API WINDOW *
-wrap_newwin(int nlines, int ncols, int begy, int begx)
+WRAP_newwin(int nlines, int ncols, int begy, int begx)
 {
 	return newwin(nlines, ncols, begy, begx);
 }
 
 WRAP_API WINDOW *
-wrap_derwin(WINDOW* orig, int nlines, int ncols, int begy, int begx)
+WRAP_derwin(WINDOW* orig, int nlines, int ncols, int begy, int begx)
 {
 	return derwin(orig, nlines, ncols, begy, begx);
 }
 
 WRAP_API WINDOW *
-wrap_subwin(WINDOW* orig, int nlines, int ncols, int begy, int begx)
+WRAP_subwin(WINDOW* orig, int nlines, int ncols, int begy, int begx)
 {
 	return subwin(orig, nlines, ncols, begy, begx);
 }
 
 WRAP_API WINDOW *
-wrap_dupwin(WINDOW *win)
+WRAP_dupwin(WINDOW *win)
 {
 	return dupwin(win);
 }
 
 WRAP_API int
-wrap_delwin(WINDOW *win)
+WRAP_delwin(WINDOW *win)
 {
 	return delwin(win);
 }
 
 WRAP_API int
-wrap_mvwin(WINDOW *win, int y, int x)
+WRAP_mvwin(WINDOW *win, int y, int x)
 {
 	return mvwin(win, y, x);
 }
 
 WRAP_API int
-wrap_mvderwin(WINDOW *win, int pary, int parx)
+WRAP_mvderwin(WINDOW *win, int pary, int parx)
 {
 	return mvderwin(win, pary, parx);
 }
 
 WRAP_API int
-wrap_syncok(WINDOW *win, int bf)
+WRAP_syncok(WINDOW *win, int bf)
 {
 	return syncok(win, (bool)bf);
 }
 
 WRAP_API void
-wrap_wsyncup(WINDOW *win)
+WRAP_wsyncup(WINDOW *win)
 {
 	wsyncup(win);
 }
 
 WRAP_API void
-wrap_wcursyncup(WINDOW *win)
+WRAP_wcursyncup(WINDOW *win)
 {
 	wcursyncup(win);
 }
 
 WRAP_API void
-wrap_wsyncdown(WINDOW *win)
+WRAP_wsyncdown(WINDOW *win)
 {
 	wsyncdown(win);
 }

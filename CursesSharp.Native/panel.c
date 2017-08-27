@@ -28,79 +28,79 @@
 
 
 WRAP_API PANEL *
-wrap_new_panel(WINDOW *win)
+WRAP_new_panel(WINDOW *win)
 {
 	return new_panel(win);
 }
 
 WRAP_API int 
-wrap_bottom_panel(PANEL *pan)
+WRAP_bottom_panel(PANEL *pan)
 {
 	return bottom_panel(pan);
 }
 
 WRAP_API int 
-wrap_top_panel(PANEL *pan)
+WRAP_top_panel(PANEL *pan)
 {
 	return top_panel(pan);
 }
 
 WRAP_API int 
-wrap_show_panel(PANEL *pan)
+WRAP_show_panel(PANEL *pan)
 {
 	return show_panel(pan);
 }
 
 WRAP_API void 
-wrap_update_panels(void)
+WRAP_update_panels(void)
 {
 	update_panels();
 }
 
 WRAP_API int 
-wrap_hide_panel(PANEL *pan)
+WRAP_hide_panel(PANEL *pan)
 {
 	return hide_panel(pan);
 }
 
 WRAP_API WINDOW *
-wrap_panel_window(PANEL *pan)
+WRAP_panel_window(PANEL *pan)
 {
 	return panel_window(pan);
 }
 
 WRAP_API int 
-wrap_replace_panel(PANEL *pan, WINDOW *win)
+WRAP_replace_panel(PANEL *pan, WINDOW *win)
 {
 	return replace_panel(pan, win);
 }
 
 WRAP_API int 
-wrap_move_panel(PANEL *pan, int starty, int startx)
+WRAP_move_panel(PANEL *pan, int starty, int startx)
 {
 	return move_panel(pan, starty, startx);
 }
 
 WRAP_API int 
-wrap_panel_hidden(PANEL *pan)
+WRAP_panel_hidden(PANEL *pan)
 {
 	return panel_hidden(pan);
 }
 
 WRAP_API PANEL *
-wrap_panel_above(PANEL *pan)
+WRAP_panel_above(PANEL *pan)
 {
 	return panel_above(pan);
 }
 
 WRAP_API PANEL *
-wrap_panel_below(PANEL *pan)
+WRAP_panel_below(PANEL *pan)
 {
 	return panel_below(pan);
 }
 
 WRAP_API int 
-wrap_del_panel(PANEL *pan)
+WRAP_del_panel(PANEL *pan)
 {
 	return del_panel(pan);
 }

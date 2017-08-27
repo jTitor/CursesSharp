@@ -1,8 +1,8 @@
 /*
  * CursesSharp
- * 
+ *
  * Copyright 2009 Robert Konklewski
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or (at your
@@ -15,44 +15,45 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #include "wrapper.h"
 
+
 WRAP_API int
-wrap_LINES(void)
+WRAP_LINES(void)
 {
 	return LINES;
 }
 
 WRAP_API int
-wrap_COLS(void)
+WRAP_COLS(void)
 {
 	return COLS;
 }
 
 WRAP_API void
-wrap_get_dims (int *lines, int *cols)
+WRAP_get_dims(int *lines, int *cols)
 {
-        *lines = LINES;
-        *cols = COLS;
+	*lines = LINES;
+	*cols = COLS;
 }
 
 WRAP_API int
-wrap_COLORS(void)
+WRAP_COLORS(void)
 {
 	return COLORS;
 }
 
 WRAP_API int
-wrap_COLOR_PAIRS(void)
+WRAP_COLOR_PAIRS(void)
 {
 	return COLOR_PAIRS;
 }
 
 WRAP_API int
-wrap_TABSIZE(void)
+WRAP_TABSIZE(void)
 {
 	return TABSIZE;
 }

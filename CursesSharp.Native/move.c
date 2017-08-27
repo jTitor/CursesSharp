@@ -22,7 +22,7 @@
 
 
 WRAP_API int
-wrap_wmove(WINDOW *win, int y, int x)
+WRAP_wmove(WINDOW *win, int y, int x)
 {
 	return wmove(win, y, x);
 }

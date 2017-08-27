@@ -29,35 +29,38 @@ namespace CursesSharp.Internal
     {
         internal static IntPtr initscr()
         {
-            IntPtr ret = wrap_initscr();
+            IntPtr ret = NativeMethods.WRAP_initscr();
             InternalException.Verify(ret, "initscr");
             return ret;
         }
 
         internal static void endwin()
         {
-            int ret = wrap_endwin();
+            int ret = NativeMethods.WRAP_endwin();
             InternalException.Verify(ret, "endwin");
         }
 
         internal static bool isendwin()
         {
-            return wrap_isendwin();
+            return NativeMethods.WRAP_isendwin();
         }
 
         internal static void resize_term(int nlines, int ncols)
         {
-            int ret = wrap_resize_term(nlines, ncols);
+            int ret = NativeMethods.WRAP_resize_term(nlines, ncols);
             InternalException.Verify(ret, "resize_term");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_initscr();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_endwin();
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_isendwin();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_resize_term(int nlines, int ncols);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_initscr();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_endwin();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_isendwin();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_resize_term(int nlines, int ncols);
     }
 }

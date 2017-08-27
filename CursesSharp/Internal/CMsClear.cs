@@ -29,35 +29,38 @@ namespace CursesSharp.Internal
     {
         internal static void wclear(IntPtr win)
         {
-            int ret = wrap_wclear(win);
+            int ret = NativeMethods.WRAP_wclear(win);
             InternalException.Verify(ret, "wclear");
         }
 
         internal static void werase(IntPtr win)
         {
-            int ret = wrap_werase(win);
+            int ret = NativeMethods.WRAP_werase(win);
             InternalException.Verify(ret, "werase");
         }
 
         internal static void wclrtobot(IntPtr win)
         {
-            int ret = wrap_wclrtobot(win);
+            int ret = NativeMethods.WRAP_wclrtobot(win);
             InternalException.Verify(ret, "wclrtobot");
         }
 
         internal static void wclrtoeol(IntPtr win)
         {
-            int ret = wrap_wclrtoeol(win);
+            int ret = NativeMethods.WRAP_wclrtoeol(win);
             InternalException.Verify(ret, "wclrtoeol");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wclear(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_werase(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wclrtobot(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wclrtoeol(IntPtr win);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wclear(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_werase(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wclrtobot(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wclrtoeol(IntPtr win);
     }
 }

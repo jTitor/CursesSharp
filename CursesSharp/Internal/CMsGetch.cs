@@ -29,33 +29,36 @@ namespace CursesSharp.Internal
     {
         internal static int wgetch(IntPtr win)
         {
-            return wrap_wgetch(win);
+            return NativeMethods.WRAP_wgetch(win);
         }
 
         internal static int mvwgetch(IntPtr win, int y, int x)
         {
-            return wrap_mvwgetch(win, y, x);
+            return NativeMethods.WRAP_mvwgetch(win, y, x);
         }
 
         internal static void ungetch(int ch)
         {
-            int ret = wrap_ungetch(ch);
+            int ret = NativeMethods.WRAP_ungetch(ch);
             InternalException.Verify(ret, "ungetch");
         }
 
         internal static void flushinp()
         {
-            int ret = wrap_flushinp();
+            int ret = NativeMethods.WRAP_flushinp();
             InternalException.Verify(ret, "flushinp");
         }
+    }
 
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern int wrap_wgetch(IntPtr win);
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern int wrap_mvwgetch(IntPtr win, int y, int x);
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern int wrap_ungetch(int ch);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_flushinp();
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        internal static extern int WRAP_wgetch(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        internal static extern int WRAP_mvwgetch(IntPtr win, int y, int x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        internal static extern int WRAP_ungetch(int ch);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_flushinp();
     }
 }

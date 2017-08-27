@@ -15,8 +15,11 @@
 #include <wchar.h>
 #endif
 
-
+#ifdef HAVE_WCHAR_H
+typedef wchar_t uchar2;
+#else
 typedef unsigned short uchar2;
+#endif
 
 typedef struct xbuffer_s xbuffer;
 struct xbuffer_s

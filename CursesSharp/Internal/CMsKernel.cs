@@ -31,88 +31,91 @@ namespace CursesSharp.Internal
     {
         internal static void def_prog_mode()
         {
-            int ret = wrap_def_prog_mode();
+            int ret = NativeMethods.WRAP_def_prog_mode();
             InternalException.Verify(ret, "def_prog_mode");
         }
 
         internal static void def_shell_mode()
         {
-            int ret = wrap_def_shell_mode();
+            int ret = NativeMethods.WRAP_def_shell_mode();
             InternalException.Verify(ret, "def_shell_mode");
         }
 
         internal static void reset_prog_mode()
         {
-            int ret = wrap_reset_prog_mode();
+            int ret = NativeMethods.WRAP_reset_prog_mode();
             InternalException.Verify(ret, "reset_prog_mode");
         }
 
         internal static void reset_shell_mode()
         {
-            int ret = wrap_reset_shell_mode();
+            int ret = NativeMethods.WRAP_reset_shell_mode();
             InternalException.Verify(ret, "reset_shell_mode");
         }
 
         internal static void resetty()
         {
-            int ret = wrap_resetty();
+            int ret = NativeMethods.WRAP_resetty();
             InternalException.Verify(ret, "resetty");
         }
 
         internal static void savetty()
         {
-            int ret = wrap_savetty();
+            int ret = NativeMethods.WRAP_savetty();
             InternalException.Verify(ret, "savetty");
         }
 
         internal static void getsyx(out int y, out int x)
         {
-            wrap_getsyx(out y, out x);
+            NativeMethods.WRAP_getsyx(out y, out x);
         }
 
         internal static void setsyx(int y, int x)
         {
-            wrap_setsyx(y, x);
+            NativeMethods.WRAP_setsyx(y, x);
         }
 
         internal static void ripoffline(int line, RipOffLineFunInt init)
         {
-            int ret = wrap_ripoffline(line, init);
+            int ret = NativeMethods.WRAP_ripoffline(line, init);
             InternalException.Verify(ret, "ripoffline");
         }
 
         internal static void napms(int ms)
         {
-            int ret = wrap_napms(ms);
+            int ret = NativeMethods.WRAP_napms(ms);
             InternalException.Verify(ret, "napms");
         }
 
         internal static int curs_set(int visibility)
         {
-            return wrap_curs_set(visibility);
+            return NativeMethods.WRAP_curs_set(visibility);
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_def_prog_mode();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_def_shell_mode();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_reset_prog_mode();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_reset_shell_mode();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_resetty();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_savetty();
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_getsyx(out int y, out int x);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_setsyx(int y, int x);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_ripoffline(int line, RipOffLineFunInt init);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_napms(int ms);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_curs_set(int visibility);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_def_prog_mode();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_def_shell_mode();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_reset_prog_mode();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_reset_shell_mode();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_resetty();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_savetty();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_getsyx(out int y, out int x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_setsyx(int y, int x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_ripoffline(int line, RipOffLineFunInt init);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_napms(int ms);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_curs_set(int visibility);
     }
 }

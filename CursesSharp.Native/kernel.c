@@ -22,67 +22,67 @@
 
 
 WRAP_API int
-wrap_def_prog_mode(void)
+WRAP_def_prog_mode(void)
 {
 	return def_prog_mode();
 }
 
 WRAP_API int
-wrap_def_shell_mode(void)
+WRAP_def_shell_mode(void)
 {
 	return def_shell_mode();
 }
 
 WRAP_API int
-wrap_reset_prog_mode(void)
+WRAP_reset_prog_mode(void)
 {
 	return reset_prog_mode();
 }
 
 WRAP_API int
-wrap_reset_shell_mode(void)
+WRAP_reset_shell_mode(void)
 {
 	return reset_shell_mode();
 }
 
 WRAP_API int
-wrap_resetty(void)
+WRAP_resetty(void)
 {
 	return resetty();
 }
 
 WRAP_API int
-wrap_savetty(void)
+WRAP_savetty(void)
 {
 	return savetty();
 }
 
 WRAP_API void
-wrap_getsyx(int *y, int *x)
+WRAP_getsyx(int *y, int *x)
 {
 	getsyx(*y, *x);
 }
 
 WRAP_API void
-wrap_setsyx(int y, int x)
+WRAP_setsyx(int y, int x)
 {
 	setsyx(y, x);
 }
 
 WRAP_API int
-wrap_ripoffline(int line, int (*init)(WINDOW *, int))
+WRAP_ripoffline(int line, int (*init)(WINDOW *, int))
 {
 	return ripoffline(line, init);
 }
 
 WRAP_API int
-wrap_napms(int ms)
+WRAP_napms(int ms)
 {
 	return napms(ms);
 }
 
 WRAP_API int
-wrap_curs_set(int visibility)
+WRAP_curs_set(int visibility)
 {
 	return curs_set(visibility);
 }

@@ -29,25 +29,28 @@ namespace CursesSharp.Internal
     {
         internal static uint getbkgd(IntPtr win)
         {
-            return wrap_getbkgd(win);
+            return NativeMethods.WRAP_getbkgd(win);
         }
 
         internal static void wbkgd(IntPtr win, uint ch)
         {
-            int ret = wrap_wbkgd(win, ch);
+            int ret = NativeMethods.WRAP_wbkgd(win, ch);
             InternalException.Verify(ret, "wbkgd");
         }
 
         internal static void wbkgdset(IntPtr win, uint ch)
         {
-            wrap_wbkgdset(win, ch);
+            NativeMethods.WRAP_wbkgdset(win, ch);
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern uint wrap_getbkgd(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wbkgd(IntPtr win, uint ch);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_wbkgdset(IntPtr win, uint ch);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint WRAP_getbkgd(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wbkgd(IntPtr win, uint ch);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_wbkgdset(IntPtr win, uint ch);
     }
 }

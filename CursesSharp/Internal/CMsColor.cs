@@ -29,87 +29,90 @@ namespace CursesSharp.Internal
     {
         internal static uint COLOR_PAIR(int n)
         {
-            return wrap_COLOR_PAIR(n);
+            return NativeMethods.WRAP_COLOR_PAIR(n);
         }
 
         internal static short PAIR_NUMBER(uint n)
         {
-            return wrap_PAIR_NUMBER(n);
+            return NativeMethods.WRAP_PAIR_NUMBER(n);
         }
 
         internal static void start_color()
         {
-            int ret = wrap_start_color();
+            int ret = NativeMethods.WRAP_start_color();
             InternalException.Verify(ret, "start_color");
         }
 
         internal static void init_pair(short color, short fg, short bg)
         {
-            int ret = wrap_init_pair(color, fg, bg);
+            int ret = NativeMethods.WRAP_init_pair(color, fg, bg);
             InternalException.Verify(ret, "init_pair");
         }
 
         internal static void init_color(short color, short red, short green, short blue)
         {
-            int ret = wrap_init_color(color, red, green, blue);
+            int ret = NativeMethods.WRAP_init_color(color, red, green, blue);
             InternalException.Verify(ret, "init_color");
         }
 
         internal static void color_content(short color, out short red, out short green, out short blue)
         {
-            int ret = wrap_color_content(color, out red, out green, out blue);
+            int ret = NativeMethods.WRAP_color_content(color, out red, out green, out blue);
             InternalException.Verify(ret, "color_content");
         }
 
         internal static void pair_content(short pair, out short fg, out short bg)
         {
-            int ret = wrap_pair_content(pair, out fg, out bg);
+            int ret = NativeMethods.WRAP_pair_content(pair, out fg, out bg);
             InternalException.Verify(ret, "pair_content");
         }
 
         internal static bool has_colors()
         {
-            return wrap_has_colors();
+            return NativeMethods.WRAP_has_colors();
         }
 
         internal static bool can_change_color()
         {
-            return wrap_can_change_color();
+            return NativeMethods.WRAP_can_change_color();
         }
 
         internal static void assume_default_colors(int f, int b)
         {
-            int ret = wrap_assume_default_colors(f, b);
+            int ret = NativeMethods.WRAP_assume_default_colors(f, b);
             InternalException.Verify(ret, "assume_default_colors");
         }
 
         internal static void use_default_colors()
         {
-            int ret = wrap_use_default_colors();
+            int ret = NativeMethods.WRAP_use_default_colors();
             InternalException.Verify(ret, "use_default_colors");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern uint wrap_COLOR_PAIR(int n);
-        [DllImport("CursesWrapper")]
-        private static extern short wrap_PAIR_NUMBER(uint n);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_start_color();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_init_pair(short color, short fg, short bg);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_init_color(short color, short red, short green, short blue);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_color_content(short color, out short red, out short green, out short blue);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_pair_content(short pair, out short fg, out short bg);
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_has_colors();
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_can_change_color();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_assume_default_colors(int f, int b);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_use_default_colors();
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint WRAP_COLOR_PAIR(int n);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern short WRAP_PAIR_NUMBER(uint n);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_start_color();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_init_pair(short color, short fg, short bg);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_init_color(short color, short red, short green, short blue);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_color_content(short color, out short red, out short green, out short blue);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_pair_content(short pair, out short fg, out short bg);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_has_colors();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_can_change_color();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_assume_default_colors(int f, int b);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_use_default_colors();
     }
 }

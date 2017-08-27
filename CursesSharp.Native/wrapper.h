@@ -18,7 +18,7 @@
 #endif
 
 #if defined(WIN32)
-#define WRAP_API __declspec(dllexport)
+#define WRAP_API extern "C" __declspec(dllexport)
 #else
 #define WRAP_API
 #endif

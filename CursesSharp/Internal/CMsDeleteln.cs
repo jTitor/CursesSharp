@@ -29,27 +29,30 @@ namespace CursesSharp.Internal
     {
         internal static void wdeleteln(IntPtr win)
         {
-            int ret = wrap_wdeleteln(win);
+            int ret = NativeMethods.WRAP_wdeleteln(win);
             InternalException.Verify(ret, "wdeleteln");
         }
 
         internal static void winsdelln(IntPtr win, int n)
         {
-            int ret = wrap_winsdelln(win, n);
+            int ret = NativeMethods.WRAP_winsdelln(win, n);
             InternalException.Verify(ret, "winsdelln");
         }
 
         internal static void winsertln(IntPtr win)
         {
-            int ret = wrap_winsertln(win);
+            int ret = NativeMethods.WRAP_winsertln(win);
             InternalException.Verify(ret, "winsertln");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wdeleteln(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_winsdelln(IntPtr win, int n);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_winsertln(IntPtr win);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wdeleteln(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_winsdelln(IntPtr win, int n);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_winsertln(IntPtr win);
     }
 }

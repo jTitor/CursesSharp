@@ -29,31 +29,34 @@ namespace CursesSharp.Internal
     {
         internal static void getyx(IntPtr win, out int y, out int x)
         {
-            wrap_getyx(win, out y, out x);
+            NativeMethods.WRAP_getyx(win, out y, out x);
         }
 
         internal static void getparyx(IntPtr win, out int y, out int x)
         {
-            wrap_getparyx(win, out y, out x);
+            NativeMethods.WRAP_getparyx(win, out y, out x);
         }
 
         internal static void getbegyx(IntPtr win, out int y, out int x)
         {
-            wrap_getbegyx(win, out y, out x);
+            NativeMethods.WRAP_getbegyx(win, out y, out x);
         }
 
         internal static void getmaxyx(IntPtr win, out int y, out int x)
         {
-            wrap_getmaxyx(win, out y, out x);
+            NativeMethods.WRAP_getmaxyx(win, out y, out x);
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_getyx(IntPtr win, out int y, out int x);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_getparyx(IntPtr win, out int y, out int x);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_getbegyx(IntPtr win, out int y, out int x);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_getmaxyx(IntPtr win, out int y, out int x);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_getyx(IntPtr win, out int y, out int x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_getparyx(IntPtr win, out int y, out int x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_getbegyx(IntPtr win, out int y, out int x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_getmaxyx(IntPtr win, out int y, out int x);
     }
 }

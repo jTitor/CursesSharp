@@ -22,13 +22,13 @@
 
 
 WRAP_API int
-wrap_beep(void)
+WRAP_beep(void)
 {
 	return beep();
 }
 
 WRAP_API int
-wrap_flash(void)
+WRAP_flash(void)
 {
 	return flash();
 }

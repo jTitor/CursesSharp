@@ -22,19 +22,19 @@
 
 
 WRAP_API unsigned int
-wrap_getbkgd(WINDOW *win)
+WRAP_getbkgd(WINDOW *win)
 {
 	return getbkgd(win);
 }
 
 WRAP_API int
-wrap_wbkgd(WINDOW *win, unsigned int ch)
+WRAP_wbkgd(WINDOW *win, unsigned int ch)
 {
 	return wbkgd(win, ch);
 }
 
 WRAP_API void
-wrap_wbkgdset(WINDOW *win, unsigned int ch)
+WRAP_wbkgdset(WINDOW *win, unsigned int ch)
 {
 	wbkgdset(win, ch);
 }

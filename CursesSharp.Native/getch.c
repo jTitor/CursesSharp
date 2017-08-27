@@ -22,25 +22,25 @@
 
 
 WRAP_API int
-wrap_wgetch(WINDOW* win)
+WRAP_wgetch(WINDOW* win)
 {
 	return wgetch(win);
 }
 
 WRAP_API int
-wrap_mvwgetch(WINDOW *win, int y, int x)
+WRAP_mvwgetch(WINDOW *win, int y, int x)
 {
 	return mvwgetch(win, y, x);
 }
 
 WRAP_API int
-wrap_ungetch(int ch)
+WRAP_ungetch(int ch)
 {
 	return ungetch(ch);
 }
 
 WRAP_API int
-wrap_flushinp(void)
+WRAP_flushinp(void)
 {
 	return flushinp();
 }

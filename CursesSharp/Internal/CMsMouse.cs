@@ -40,55 +40,58 @@ namespace CursesSharp.Internal
     {
         internal static bool has_mouse()
         {
-            return wrap_has_mouse();
+            return NativeMethods.WRAP_has_mouse();
         }
 
         internal static void getmouse(out WrapMEvent mevent)
         {
-            int ret = wrap_getmouse(out mevent);
+            int ret = NativeMethods.WRAP_getmouse(out mevent);
             InternalException.Verify(ret, "getmouse");
         }
 
         internal static void ungetmouse(ref WrapMEvent mevent)
         {
-            int ret = wrap_ungetmouse(ref mevent);
+            int ret = NativeMethods.WRAP_ungetmouse(ref mevent);
             InternalException.Verify(ret, "ungetmouse");
         }
 
         internal static uint mousemask(uint mask, out uint oldmask)
         {
-            return wrap_mousemask(mask, out oldmask);
+            return NativeMethods.WRAP_mousemask(mask, out oldmask);
         }
 
         internal static bool wenclose(IntPtr win, int y, int x)
         {
-            return wrap_wenclose(win, y, x);
+            return NativeMethods.WRAP_wenclose(win, y, x);
         }
 
         internal static bool wmouse_trafo(IntPtr win, ref int y, ref int x, bool to_screen)
         {
-            return wrap_wmouse_trafo(win, ref y, ref x, to_screen);
+            return NativeMethods.WRAP_wmouse_trafo(win, ref y, ref x, to_screen);
         }
 
         internal static int mouseinterval(int wait)
         {
-            return wrap_mouseinterval(wait);
+            return NativeMethods.WRAP_mouseinterval(wait);
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_has_mouse();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_getmouse(out WrapMEvent wrap_mevent);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_ungetmouse(ref WrapMEvent wrap_mevent);
-        [DllImport("CursesWrapper")]
-        private static extern uint wrap_mousemask(uint mask, out uint oldmask);
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_wenclose(IntPtr win, int y, int x);
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_wmouse_trafo(IntPtr win, ref int y, ref int x, Boolean to_screen);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_mouseinterval(int wait);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_has_mouse();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_getmouse(out WrapMEvent WRAP_mevent);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_ungetmouse(ref WrapMEvent WRAP_mevent);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern uint WRAP_mousemask(uint mask, out uint oldmask);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_wenclose(IntPtr win, int y, int x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_wmouse_trafo(IntPtr win, ref int y, ref int x, Boolean to_screen);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_mouseinterval(int wait);
     }
 #endif
 }

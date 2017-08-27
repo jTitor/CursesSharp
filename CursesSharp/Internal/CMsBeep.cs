@@ -29,19 +29,22 @@ namespace CursesSharp.Internal
     {
         internal static void beep()
         {
-            int ret = wrap_beep();
+            int ret = NativeMethods.WRAP_beep();
             InternalException.Verify(ret, "beep");
         }
 
         internal static void flash()
         {
-            int ret = wrap_flash();
+            int ret = NativeMethods.WRAP_flash();
             InternalException.Verify(ret, "flash");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_beep();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_flash();
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_beep();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_flash();
     }
 }

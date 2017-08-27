@@ -22,13 +22,13 @@
 
 
 WRAP_API int
-wrap_scroll(WINDOW *win)
+WRAP_scroll(WINDOW *win)
 {
 	return scroll(win);
 }
 
 WRAP_API int
-wrap_wscrl(WINDOW *win, int n)
+WRAP_wscrl(WINDOW *win, int n)
 {
 	return wscrl(win, n);
 }

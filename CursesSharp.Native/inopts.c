@@ -22,103 +22,103 @@
 
 
 WRAP_API int
-wrap_cbreak(void)
+WRAP_cbreak(void)
 {
 	return cbreak();
 }
 
 WRAP_API int
-wrap_nocbreak(void)
+WRAP_nocbreak(void)
 {
 	return nocbreak();
 }
 
 WRAP_API int
-wrap_echo(void)
+WRAP_echo(void)
 {
 	return echo();
 }
 
 WRAP_API int
-wrap_noecho(void)
+WRAP_noecho(void)
 {
 	return noecho();
 }
 
 WRAP_API int
-wrap_halfdelay(int tenths)
+WRAP_halfdelay(int tenths)
 {
 	return halfdelay(tenths);
 }
 
 WRAP_API int
-wrap_intrflush(WINDOW *win, int bf)
+WRAP_intrflush(WINDOW *win, int bf)
 {
-	return intrflush(win, (bool)bf);
+	return intrflush(win, (unsigned char)bf);
 }
 
 WRAP_API int
-wrap_keypad(WINDOW *win, int bf)
+WRAP_keypad(WINDOW *win, int bf)
 {
-	return keypad(win, (bool)bf);
+	return keypad(win, (unsigned char)bf);
 }
 
 WRAP_API int
-wrap_meta(WINDOW *win, int bf)
+WRAP_meta(WINDOW *win, int bf)
 {
-	return meta(win, (bool)bf);
+	return meta(win, (unsigned char)bf);
 }
 
 WRAP_API int
-wrap_nl(void)
+WRAP_nl(void)
 {
 	return nl();
 }
 
 WRAP_API int
-wrap_nonl(void)
+WRAP_nonl(void)
 {
 	return nonl();
 }
 
 WRAP_API int
-wrap_nodelay(WINDOW *win, int bf)
+WRAP_nodelay(WINDOW *win, bool bf)
 {
-	return nodelay(win, (bool)bf);
+	return nodelay(win, (unsigned char)bf);
 }
 
 WRAP_API int
-wrap_raw(void)
+WRAP_raw(void)
 {
 	return raw();
 }
 
 WRAP_API int
-wrap_noraw(void)
+WRAP_noraw(void)
 {
 	return noraw();
 }
 
 WRAP_API void
-wrap_qiflush(void)
+WRAP_qiflush(void)
 {
 	qiflush();
 }
 
 WRAP_API void
-wrap_noqiflush(void)
+WRAP_noqiflush(void)
 {
 	noqiflush();
 }
 
 WRAP_API int
-wrap_notimeout(WINDOW *win, int bf)
+WRAP_notimeout(WINDOW *win, int bf)
 {
-	return notimeout(win, (bool)bf);
+	return notimeout(win, (unsigned char)bf);
 }
 
 WRAP_API void
-wrap_wtimeout(WINDOW *win, int delay)
+WRAP_wtimeout(WINDOW *win, int delay)
 {
 	wtimeout(win, delay);
 }

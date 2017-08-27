@@ -29,45 +29,48 @@ namespace CursesSharp.Internal
     {
         internal static IntPtr newpad(int nlines, int ncols)
         {
-            IntPtr ret = wrap_newpad(nlines, ncols);
+            IntPtr ret = NativeMethods.WRAP_newpad(nlines, ncols);
             InternalException.Verify(ret, "newpad");
             return ret;
         }
 
         internal static IntPtr subpad(IntPtr orig, int nlines, int ncols, int begy, int begx)
         {
-            IntPtr ret = wrap_subpad(orig, nlines, ncols, begy, begx);
+            IntPtr ret = NativeMethods.WRAP_subpad(orig, nlines, ncols, begy, begx);
             InternalException.Verify(ret, "subpad");
             return ret;
         }
 
         internal static void prefresh(IntPtr win, int py, int px, int sy1, int sx1, int sy2, int sx2)
         {
-            int ret = wrap_prefresh(win, py, px, sy1, sx1, sy2, sx2);
+            int ret = NativeMethods.WRAP_prefresh(win, py, px, sy1, sx1, sy2, sx2);
             InternalException.Verify(ret, "prefresh");
         }
 
         internal static void pnoutrefresh(IntPtr win, int py, int px, int sy1, int sx1, int sy2, int sx2)
         {
-            int ret = wrap_pnoutrefresh(win, py, px, sy1, sx1, sy2, sx2);
+            int ret = NativeMethods.WRAP_pnoutrefresh(win, py, px, sy1, sx1, sy2, sx2);
             InternalException.Verify(ret, "pnoutrefresh");
         }
 
         internal static void pechochar(IntPtr pad, uint ch)
         {
-            int ret = wrap_pechochar(pad, ch);
+            int ret = NativeMethods.WRAP_pechochar(pad, ch);
             InternalException.Verify(ret, "pechochar");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_newpad(int nlines, int ncols);
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_subpad(IntPtr orig, int nlines, int ncols, int begy, int begx);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_prefresh(IntPtr win, int py, int px, int sy1, int sx1, int sy2, int sx2);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_pnoutrefresh(IntPtr win, int py, int px, int sy1, int sx1, int sy2, int sx2);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_pechochar(IntPtr pad, uint ch);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_newpad(int nlines, int ncols);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_subpad(IntPtr orig, int nlines, int ncols, int begy, int begx);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_prefresh(IntPtr win, int py, int px, int sy1, int sx1, int sy2, int sx2);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_pnoutrefresh(IntPtr win, int py, int px, int sy1, int sx1, int sy2, int sx2);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_pechochar(IntPtr pad, uint ch);
     }
 }

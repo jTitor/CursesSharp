@@ -29,51 +29,54 @@ namespace CursesSharp.Internal
     {
         internal static void wborder(IntPtr win, uint ls, uint rs, uint ts, uint bs, uint tl, uint tr, uint bl, uint br)
         {
-            int ret = wrap_wborder(win, ls, rs, ts, bs, tl, tr, bl, br);
+            int ret = NativeMethods.WRAP_wborder(win, ls, rs, ts, bs, tl, tr, bl, br);
             InternalException.Verify(ret, "wborder");
         }
 
         internal static void box(IntPtr win, uint verch, uint horch)
         {
-            int ret = wrap_box(win, verch, horch);
+            int ret = NativeMethods.WRAP_box(win, verch, horch);
             InternalException.Verify(ret, "box");
         }
 
         internal static void whline(IntPtr win, uint ch, int n)
         {
-            int ret = wrap_whline(win, ch, n);
+            int ret = NativeMethods.WRAP_whline(win, ch, n);
             InternalException.Verify(ret, "whline");
         }
 
         internal static void wvline(IntPtr win, uint ch, int n)
         {
-            int ret = wrap_wvline(win, ch, n);
+            int ret = NativeMethods.WRAP_wvline(win, ch, n);
             InternalException.Verify(ret, "wvline");
         }
 
         internal static void mvwhline(IntPtr win, int y, int x, uint ch, int n)
         {
-            int ret = wrap_mvwhline(win, y, x, ch, n);
+            int ret = NativeMethods.WRAP_mvwhline(win, y, x, ch, n);
             InternalException.Verify(ret, "mvwhline");
         }
 
         internal static void mvwvline(IntPtr win, int y, int x, uint ch, int n)
         {
-            int ret = wrap_mvwvline(win, y, x, ch, n);
+            int ret = NativeMethods.WRAP_mvwvline(win, y, x, ch, n);
             InternalException.Verify(ret, "mvwvline");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wborder(IntPtr win, uint ls, uint rs, uint ts, uint bs, uint tl, uint tr, uint bl, uint br);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_box(IntPtr win, uint verch, uint horch);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_whline(IntPtr win, uint ch, int n);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wvline(IntPtr win, uint ch, int n);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_mvwhline(IntPtr win, int y, int x, uint ch, int n);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_mvwvline(IntPtr win, int y, int x, uint ch, int n);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wborder(IntPtr win, uint ls, uint rs, uint ts, uint bs, uint tl, uint tr, uint bl, uint br);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_box(IntPtr win, uint verch, uint horch);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_whline(IntPtr win, uint ch, int n);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wvline(IntPtr win, uint ch, int n);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_mvwhline(IntPtr win, int y, int x, uint ch, int n);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_mvwvline(IntPtr win, int y, int x, uint ch, int n);
     }
 }

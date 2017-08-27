@@ -29,35 +29,38 @@ namespace CursesSharp.Internal
     {
         internal static void scr_dump(string filename)
         {
-            int ret = wrap_scr_dump(filename);
+            int ret = NativeMethods.WRAP_scr_dump(filename);
             InternalException.Verify(ret, "scr_dump");
         }
 
         internal static void scr_init(string filename)
         {
-            int ret = wrap_scr_init(filename);
+            int ret = NativeMethods.WRAP_scr_init(filename);
             InternalException.Verify(ret, "scr_init");
         }
 
         internal static void scr_restore(string filename)
         {
-            int ret = wrap_scr_restore(filename);
+            int ret = NativeMethods.WRAP_scr_restore(filename);
             InternalException.Verify(ret, "scr_restore");
         }
 
         internal static void scr_set(string filename)
         {
-            int ret = wrap_scr_set(filename);
+            int ret = NativeMethods.WRAP_scr_set(filename);
             InternalException.Verify(ret, "scr_set");
         }
+    }
 
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern int wrap_scr_dump(String filename);
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern int wrap_scr_init(String filename);
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern int wrap_scr_restore(String filename);
-        [DllImport("CursesWrapper", CharSet = CharSet.Ansi)]
-        private static extern int wrap_scr_set(String filename);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_scr_dump(String filename);
+        [DllImport("CursesSharp.Native.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_scr_init(String filename);
+        [DllImport("CursesSharp.Native.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_scr_restore(String filename);
+        [DllImport("CursesSharp.Native.dll", CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_scr_set(String filename);
     }
 }

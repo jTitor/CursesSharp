@@ -35,7 +35,7 @@ struct WrapMEvent
 STATIC_ASSERT(sizeof(struct WrapMEvent) == 20);
 
 WRAP_API int
-wrap_has_mouse(void)
+WRAP_has_mouse(void)
 {
 #if defined(HAVE_HAS_MOUSE)
 	return (int)has_mouse();
@@ -45,53 +45,53 @@ wrap_has_mouse(void)
 }
 
 WRAP_API int 
-wrap_getmouse(struct WrapMEvent *wrap_mevent)
+WRAP_getmouse(struct WrapMEvent *WRAP_mevent)
 {
-	MEVENT mevent;
-	int ret = getmouse(&mevent);
+	//MEVENT mevent;
+	int ret = getmouse();
 	if (ret != ERR)
 	{
-		wrap_mevent->id = mevent.id;
-		wrap_mevent->x = mevent.x;
-		wrap_mevent->y = mevent.y;
-		wrap_mevent->z = mevent.z;
-		wrap_mevent->bstate = (unsigned int)mevent.bstate;
+		//WRAP_mevent->id = mevent.id;
+		//WRAP_mevent->x = mevent.x;
+		//WRAP_mevent->y = mevent.y;
+		//WRAP_mevent->z = mevent.z;
+		//WRAP_mevent->bstate = (unsigned int)mevent.bstate;
 	}
 	return ret;
 }
 
 WRAP_API int 
-wrap_ungetmouse(struct WrapMEvent *wrap_mevent)
+WRAP_ungetmouse(struct WrapMEvent *WRAP_mevent)
 {
 	MEVENT mevent;
-	mevent.id = (short)wrap_mevent->id;
-	mevent.x = (int)wrap_mevent->x;
-	mevent.y = (int)wrap_mevent->y;
-	mevent.z = (int)wrap_mevent->z;
-	mevent.bstate = (mmask_t)wrap_mevent->bstate;
+	mevent.id = (short)WRAP_mevent->id;
+	mevent.x = (int)WRAP_mevent->x;
+	mevent.y = (int)WRAP_mevent->y;
+	mevent.z = (int)WRAP_mevent->z;
+	mevent.bstate = (mmask_t)WRAP_mevent->bstate;
 	return ungetmouse(&mevent);
 }
 
 WRAP_API unsigned int
-wrap_mousemask(unsigned int mask, unsigned int *oldmask)
+WRAP_mousemask(unsigned int mask, unsigned int *oldmask)
 {
 	return (unsigned int)mousemask((mmask_t)mask, (mmask_t*)oldmask);
 }
 
 WRAP_API int
-wrap_wenclose(WINDOW *win, int y, int x)
+WRAP_wenclose(WINDOW *win, int y, int x)
 {
 	return wenclose(win, y, x);
 }
 
 WRAP_API int
-wrap_wmouse_trafo(WINDOW *win, int *y, int *x, int to_screen)
+WRAP_wmouse_trafo(WINDOW *win, int *y, int *x, int to_screen)
 {
 	return wmouse_trafo(win, y, x, (bool)to_screen);
 }
 
 WRAP_API int 
-wrap_mouseinterval(int wait)
+WRAP_mouseinterval(int wait)
 {
 	return mouseinterval(wait);
 }

@@ -2,9 +2,9 @@
 
 /*
  * CursesSharp
- * 
+ *
  * Copyright 2009 Robert Konklewski
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or (at your
@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #endregion
@@ -46,7 +46,7 @@ namespace CursesSharp
         /// Creates an empty mouse event.
         /// </summary>
         /// <remarks>
-        /// To be used for creating an object that is passed to 
+        /// To be used for creating an object that is passed to
         /// <see cref="Curses.GetMouse(MouseEvent)"/> method.
         /// </remarks>
         public MouseEvent()
@@ -88,7 +88,7 @@ namespace CursesSharp
         public int X
         {
             get { return this.x; }
-             set { this.x = value; }
+            internal set { this.x = value; }
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace CursesSharp
         public int Y
         {
             get { return this.y; }
-             set { this.y = value; }
+            internal set { this.y = value; }
         }
 
         /// <summary>
@@ -131,47 +131,53 @@ namespace CursesSharp
     /// </summary>
     public static partial class Curses
     {
-		// We encode ESC + char (what Alt-char generates) as 0x2000 + char
-		public const int KeyAlt = 0x2000;
-		public const int ERR = int.MaxValue;
+        // We encode ESC + char (what Alt-char generates) as 0x2000 + char
+        public const int KeyAlt = 0x2000;
+        public const int ERR = int.MaxValue;
 
-		public static int IsAlt (int key)
-		{
-			if ((key & KeyAlt) != 0)
-				return key & ~KeyAlt;
-			return 0;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static int IsAlt(int key)
+        {
+            if ((key & KeyAlt) != 0)
+                return key & ~KeyAlt;
+            return 0;
+        }
 
-		static public uint ColorPair(uint n){
-			return 0 + n * 256;
-		}
+        static public uint ColorPair(uint n)
+        {
+            return 0 + n * 256;
+        }
 
-		/// <summary>
-		/// When initscr() is called two WINDOWs, the stdscr and curscr come into existance. 
-		/// stdscr (standard screen) is what will be displayed by the next refresh() call 
-		/// stdscr have size equivalent to that of the screen.
-		/// </summary>
+        /// <summary>
+        /// When initscr() is called two WINDOWs, the stdscr and curscr come into existance.
+        /// stdscr (standard screen) is what will be displayed by the next refresh() call
+        /// stdscr have size equivalent to that of the screen.
+        /// </summary>
         private static Window stdscr = null;
-		/// <summary>
-		/// When initscr() is called two WINDOWs, the stdscr and curscr come into existance. 
-		/// curscr is the current state of the screen.
-		/// curscr have size equivalent to that of the screen.
-		/// </summary>
-		private static Window curscr = null;
+        /// <summary>
+        /// When initscr() is called two WINDOWs, the stdscr and curscr come into existance.
+        /// curscr is the current state of the screen.
+        /// curscr have size equivalent to that of the screen.
+        /// </summary>
+        private static Window curscr = null;
 
         /// <summary>
         /// Represents the default window that is created during library initialization.
-		/// </summary>
+        /// </summary>
         /// <value>Gets the default window.</value>
         public static Window StdScr
         {
             get { return stdscr; }
         }
 
-		public static Window CurScr
-		{
-			get { return curscr; }
-		}
+        public static Window CurScr
+        {
+            get { return curscr; }
+        }
 
         /// <summary>
         /// Represents the number of lines on the screen.
@@ -241,12 +247,12 @@ namespace CursesSharp
         /// <summary>
         /// Initializes Curses Sharp and the underlying curses implementation.
         /// </summary>
-        /// 
+        ///
         /// <remarks>
         /// It should be the first function called as most other functions
         /// require the library be initialized.
         /// <para>
-        /// The Window object returned can be later retrieved using 
+        /// The Window object returned can be later retrieved using
         /// <see cref="StdScr"/> property.
         /// </para>
         /// </remarks>
@@ -256,8 +262,8 @@ namespace CursesSharp
             if (stdscr != null)
                 throw new InvalidOperationException("Curses is already initialized.");
 
-            stdscr = Window.WrapHandle(CursesMethods.initscr ());
-			curscr = Window.WrapHandle(CursesMethods.curscr ());
+            stdscr = Window.WrapHandle(CursesMethods.initscr());
+            curscr = Window.WrapHandle(CursesMethods.curscr());
             return stdscr;
         }
 
@@ -301,9 +307,9 @@ namespace CursesSharp
         /// Sounds an audible alarm.
         /// </summary>
         /// <remarks>
-        /// Sounds an audible alarm on the terminal, if possible; otherwise 
+        /// Sounds an audible alarm on the terminal, if possible; otherwise
         /// it flashes the screen (visible bell).
-        /// If neither alter is possible, nothing happens.        
+        /// If neither alter is possible, nothing happens.
         /// </remarks>
         public static void Beep()
         {
@@ -332,8 +338,8 @@ namespace CursesSharp
         /// terminal to the values they had when the terminal was just
         /// turned on.
         /// <para>
-        /// StartColor must be called if the programmer wants to use colors, 
-        /// and before any other color manipulation method is called. It is 
+        /// StartColor must be called if the programmer wants to use colors,
+        /// and before any other color manipulation method is called. It is
         /// good practice to call this method right after <see cref="InitScr"/>.
         /// </para>
         /// </remarks>
@@ -346,12 +352,12 @@ namespace CursesSharp
         /// Changes the definition of a color-pair.
         /// </summary>
         /// <remarks>
-        /// If the color-pair was previously initialized, the screen is 
-        /// refreshed and all occurences of that color-pair are changed 
+        /// If the color-pair was previously initialized, the screen is
+        /// refreshed and all occurences of that color-pair are changed
         /// to the new definition.
         /// <para>
-        /// For portable applications the value of <paramref name="color"/> 
-        /// must be between 1 and <see cref="ColorPairs"/> - 1, and the value 
+        /// For portable applications the value of <paramref name="color"/>
+        /// must be between 1 and <see cref="ColorPairs"/> - 1, and the value
         /// of <paramref name="fg"/> and <paramref name="bg"/> must be
         /// between 0 and <see cref="Colors"/>.
         /// </para>
@@ -368,10 +374,10 @@ namespace CursesSharp
         /// Changes the definition of a color.
         /// </summary>
         /// <remarks>
-        /// When it is used, all occurences of that color on the screen 
+        /// When it is used, all occurences of that color on the screen
         /// immediately change to the new definition.
         /// <para>
-        /// The value of <paramref name="color"/> must be between 0 and 
+        /// The value of <paramref name="color"/> must be between 0 and
         /// <see cref="Colors"/>, and the value of <paramref name="red"/>,
         /// <paramref name="green"/> and <paramref name="blue"/> must be
         /// between 0 and 1000.
@@ -395,18 +401,18 @@ namespace CursesSharp
         /// information about amounts of the components in that color.
         /// the components.
         /// <para>
-        /// The value of <paramref name="color"/> must be between 0 and 
-        /// <see cref="Colors"/>. The values that are stored in 
-        /// <paramref name="red"/>, <paramref name="green"/> and 
+        /// The value of <paramref name="color"/> must be between 0 and
+        /// <see cref="Colors"/>. The values that are stored in
+        /// <paramref name="red"/>, <paramref name="green"/> and
         /// <paramref name="blue"/> are between 0 and 1000.
         /// </para>
         /// </remarks>
         /// <param name="color">Color number</param>
-        /// <param name="red">Reference to a variable in which the amount of 
+        /// <param name="red">Reference to a variable in which the amount of
         ///     the red color component will be stored.</param>
-        /// <param name="green">Reference to a variable in which the amount of 
+        /// <param name="green">Reference to a variable in which the amount of
         ///     the green color component will be stored.</param>
-        /// <param name="blue">Reference to a variable in which the amount of 
+        /// <param name="blue">Reference to a variable in which the amount of
         ///     the blue color component will be stored.</param>
         public static void ColorContent(short color, out short red, out short green, out short blue)
         {
@@ -420,8 +426,8 @@ namespace CursesSharp
         /// Requires two references of variables for storing the foreground
         /// and the background color numbers.
         /// <para>
-        /// The value of <paramref name="color"/> must be between 1 and 
-        /// <see cref="ColorPairs"/> - 1. The values that are stored in 
+        /// The value of <paramref name="color"/> must be between 1 and
+        /// <see cref="ColorPairs"/> - 1. The values that are stored in
         /// <paramref name="fg"/> and <paramref name="bg"/> are between
         /// 0 and <see cref="Colors"/>.
         /// </para>
@@ -451,7 +457,7 @@ namespace CursesSharp
         /// <summary>
         /// Represents the ability of the terminal to change color definitions.
         /// </summary>
-        /// <value>Returns true if the terminal supports colors and can change 
+        /// <value>Returns true if the terminal supports colors and can change
         ///     their definitions.</value>
         public static bool CanChangeColor
         {
@@ -465,9 +471,9 @@ namespace CursesSharp
         /// Changes the definition of a color-pair number 0.
         /// </summary>
         /// <remarks>
-        /// The screen is refreshed and all occurences of color-pair 
-        /// number 0 are changed to the new definition. The value of 
-        /// <paramref name="fg"/> and <paramref name="bg"/> must 
+        /// The screen is refreshed and all occurences of color-pair
+        /// number 0 are changed to the new definition. The value of
+        /// <paramref name="fg"/> and <paramref name="bg"/> must
         /// be between 0 and <see cref="Colors"/>.
         /// </remarks>
         /// <param name="fg">Foreground color number.</param>
@@ -481,7 +487,7 @@ namespace CursesSharp
         /// Enables the use of default (-1) colors.
         /// </summary>
         /// <remarks>
-        /// If this method is first called, the color number -1 can also be 
+        /// If this method is first called, the color number -1 can also be
         /// used in methods that require color numbers as arguments.
         /// </remarks>
         public static void UseDefaultColors()
@@ -503,7 +509,7 @@ namespace CursesSharp
         }
 
         /// <summary>
-        /// Throws away any typeahead that has been typed by the user and 
+        /// Throws away any typeahead that has been typed by the user and
         /// has not yet been read by the program.
         /// </summary>
         public static void FlushInput()
@@ -512,17 +518,17 @@ namespace CursesSharp
         }
 
         /// <summary>
-        /// Represents the state of cbreak mode, i.e. the state of line 
-        /// buffering and erase/kill character processing. 
+        /// Represents the state of cbreak mode, i.e. the state of line
+        /// buffering and erase/kill character processing.
         /// </summary>
         /// <remarks>
-        /// If the value is set to true, then line buffering and erase/kill 
-        /// character processing is disabled, making characters typed by 
+        /// If the value is set to true, then line buffering and erase/kill
+        /// character processing is disabled, making characters typed by
         /// the user immediately available to the program. If the value
         /// is set to false, then the terminal is put into normal (cooked)
         /// mode.
         /// <para>
-        /// Initially the terminal may or may not be in cbreak mode; therefore, 
+        /// Initially the terminal may or may not be in cbreak mode; therefore,
         /// a program should enable or disable this mode explicitly.
         /// </para>
         /// <para>
@@ -542,11 +548,11 @@ namespace CursesSharp
         }
 
         /// <summary>
-        /// Sets half-delay mode. 
+        /// Sets half-delay mode.
         /// </summary>
         /// <remarks>
-        /// This mode is similar to cbreak mode in that characters typed 
-        /// by the user are immediately available to the program. 
+        /// This mode is similar to cbreak mode in that characters typed
+        /// by the user are immediately available to the program.
         /// However, after blocking for <paramref name="tenths"/>
         /// tenths of seconds, -1 is returned if nothing has been typed.
         /// <para>
@@ -554,9 +560,9 @@ namespace CursesSharp
         /// 1 and 255.
         /// </para>
         /// <para>
-        /// The terminal is placed out of half-delay mode by entering normal 
+        /// The terminal is placed out of half-delay mode by entering normal
         /// (cooked) mode, i.e. setting <see cref="CBreakMode"/> to false.
-        /// </para>        
+        /// </para>
         /// </remarks>
         /// <param name="tenths"></param>
         public static void HalfDelayMode(int tenths)
@@ -565,10 +571,10 @@ namespace CursesSharp
         }
 
         /// <summary>
-        /// Represents the state of raw mode. 
+        /// Represents the state of raw mode.
         /// </summary>
         /// <remarks>
-        /// Raw mode is similar to cbreak 
+        /// Raw mode is similar to cbreak
         /// mode, in that characters typed are immediately available to the
         /// program. The differences are that in raw mode, the interrupt,
         /// quit, suspend, and flow characters are all passed through
@@ -588,7 +594,7 @@ namespace CursesSharp
 
         /// <summary>
         /// Represents the state of echoing characters typed by the user
-        /// by <see cref="WindowBase.GetChar()"/>. 
+        /// by <see cref="WindowBase.GetChar()"/>.
         /// </summary>
         /// <remarks>
         /// If set to true, characters are echoed as they are typed. If
@@ -722,7 +728,7 @@ namespace CursesSharp
 
         public static void RipOffLine(int line, RipOffLineFun init)
         {
-            RipOffLineFunInt initInt = delegate(IntPtr winptr, int ncols)
+            RipOffLineFunInt initInt = delegate (IntPtr winptr, int ncols)
             {
                 return init(Window.WrapHandle(winptr), ncols);
             };
@@ -778,7 +784,7 @@ namespace CursesSharp
         /// <list type="bullet">
         ///     <item>
         ///         <description>
-        ///         Printable characters are displayed as themselves, e.g. 
+        ///         Printable characters are displayed as themselves, e.g.
         ///         a one-character string containing the key.
         ///         </description>
         ///     </item>
@@ -808,7 +814,7 @@ namespace CursesSharp
         ///     </item>
         ///     <item>
         ///         <description>
-        ///         Otherwise (if there is no corresponding name), an exception 
+        ///         Otherwise (if there is no corresponding name), an exception
         ///         is thrown.
         ///         </description>
         ///     </item>
@@ -842,15 +848,13 @@ namespace CursesSharp
 
         public static MouseEvent GetMouse()
         {
-            WrapMEvent wme;
-            CursesMethods.getmouse(out wme);
+            CursesMethods.getmouse(out WrapMEvent wme);
             return new MouseEvent(wme.id, wme.x, wme.y, wme.z, (MouseState)wme.bstate);
         }
 
         public static void GetMouse(MouseEvent mevent)
         {
-            WrapMEvent wme;
-            CursesMethods.getmouse(out wme);
+            CursesMethods.getmouse(out WrapMEvent wme);
             mevent.Id = wme.id;
             mevent.X = wme.x;
             mevent.Y = wme.y;
@@ -871,14 +875,12 @@ namespace CursesSharp
 
         public static MouseState MouseMask(MouseState mask)
         {
-            MouseState dummy;
-            return MouseMask(mask, out dummy);
+            return MouseMask(mask, out MouseState dummy);
         }
 
         public static MouseState MouseMask(MouseState mask, out MouseState oldmask)
         {
-            uint tmpMask = 0;
-            uint outMask = CursesMethods.mousemask((uint)mask, out tmpMask);
+            uint outMask = CursesMethods.mousemask((uint)mask, out uint tmpMask);
             oldmask = (MouseState)tmpMask;
             return (MouseState)outMask;
         }
@@ -904,10 +906,10 @@ namespace CursesSharp
             CursesMethods.traceoff();
         }
 
-		public static void SendSignalToStop()
-		{
-			CursesMethods.sendsigtstp ();
-		}
+        public static void SendSignalToStop()
+        {
+            CursesMethods.sendsigtstp();
+        }
 
         public static string UnCtrl(uint c)
         {

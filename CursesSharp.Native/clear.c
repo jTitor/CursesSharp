@@ -22,25 +22,25 @@
 
 
 WRAP_API int
-wrap_wclear(WINDOW *win)
+WRAP_wclear(WINDOW *win)
 {
 	return wclear(win);
 }
 
 WRAP_API int
-wrap_werase(WINDOW *win)
+WRAP_werase(WINDOW *win)
 {
 	return werase(win);
 }
 
 WRAP_API int
-wrap_wclrtobot(WINDOW *win)
+WRAP_wclrtobot(WINDOW *win)
 {
 	return wclrtobot(win);
 }
 
 WRAP_API int
-wrap_wclrtoeol(WINDOW *win)
+WRAP_wclrtoeol(WINDOW *win)
 {
 	return wclrtoeol(win);
 }

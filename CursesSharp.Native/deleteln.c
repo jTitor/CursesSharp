@@ -22,19 +22,19 @@
 
 
 WRAP_API int
-wrap_wdeleteln(WINDOW *win)
+WRAP_wdeleteln(WINDOW *win)
 {
 	return wdeleteln(win);
 }
 
 WRAP_API int
-wrap_winsdelln(WINDOW *win, int n)
+WRAP_winsdelln(WINDOW *win, int n)
 {
 	return winsdelln(win, n);
 }
 
 WRAP_API int
-wrap_winsertln(WINDOW *win)
+WRAP_winsertln(WINDOW *win)
 {
 	return winsertln(win);
 }

@@ -22,13 +22,13 @@
 
 
 WRAP_API int
-wrap_winchnstr(WINDOW *win, unsigned int *ch, int n)
+WRAP_winchnstr(WINDOW *win, unsigned int *ch, int n)
 {
 	return winchnstr(win, (chtype*)ch, n);
 }
 
 WRAP_API int
-wrap_mvwinchnstr(WINDOW *win, int y, int x, unsigned int *ch, int n)
+WRAP_mvwinchnstr(WINDOW *win, int y, int x, unsigned int *ch, int n)
 {
 	return mvwinchnstr(win, y, x, (chtype*)ch, n);
 }

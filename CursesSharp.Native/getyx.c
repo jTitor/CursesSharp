@@ -22,25 +22,25 @@
 
 
 WRAP_API void
-wrap_getyx(WINDOW *win, int *y, int *x)
+WRAP_getyx(WINDOW *win, int *y, int *x)
 {
 	getyx(win, *y, *x);
 }
 
 WRAP_API void
-wrap_getparyx(WINDOW *win, int *y, int *x)
+WRAP_getparyx(WINDOW *win, int *y, int *x)
 {
 	getparyx(win, *y, *x);
 }
 
 WRAP_API void
-wrap_getbegyx(WINDOW *win, int *y, int *x)
+WRAP_getbegyx(WINDOW *win, int *y, int *x)
 {
 	getbegyx(win, *y, *x);
 }
 
 WRAP_API void
-wrap_getmaxyx(WINDOW *win, int *y, int *x)
+WRAP_getmaxyx(WINDOW *win, int *y, int *x)
 {
 	getmaxyx(win, *y, *x);
 }

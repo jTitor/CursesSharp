@@ -22,13 +22,13 @@
 
 
 WRAP_API int
-wrap_waddchnstr(WINDOW *win, unsigned int *chstr, int n)
+WRAP_waddchnstr(WINDOW *win, unsigned int *chstr, int n)
 {
 	return waddchnstr(win, (chtype*)chstr, n);
 }
 
 WRAP_API int
-wrap_mvwaddchnstr(WINDOW *win, int y, int x, unsigned int *chstr, int n)
+WRAP_mvwaddchnstr(WINDOW *win, int y, int x, unsigned int *chstr, int n)
 {
 	return mvwaddchnstr(win, y, x, (chtype*)chstr, n);
 }

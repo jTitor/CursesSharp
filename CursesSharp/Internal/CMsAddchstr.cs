@@ -29,19 +29,22 @@ namespace CursesSharp.Internal
     {
         internal static void waddchnstr(IntPtr win, uint[] chstr, int n)
         {
-            int ret = wrap_waddchnstr(win, chstr, n);
+            int ret = NativeMethods.WRAP_waddchnstr(win, chstr, n);
             InternalException.Verify(ret, "waddchnstr");
         }
 
         internal static void mvwaddchnstr(IntPtr win, int y, int x, uint[] chstr, int n)
         {
-            int ret = wrap_mvwaddchnstr(win, y, x, chstr, n);
+            int ret = NativeMethods.WRAP_mvwaddchnstr(win, y, x, chstr, n);
             InternalException.Verify(ret, "mvwaddchnstr");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_waddchnstr(IntPtr win, uint[] chstr, int n);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_mvwaddchnstr(IntPtr win, int y, int x, uint[] chstr, int n);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_waddchnstr(IntPtr win, uint[] chstr, int n);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_mvwaddchnstr(IntPtr win, int y, int x, uint[] chstr, int n);
     }
 }

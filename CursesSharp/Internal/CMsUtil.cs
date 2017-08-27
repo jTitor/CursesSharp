@@ -29,41 +29,44 @@ namespace CursesSharp.Internal
     {
         internal static string unctrl(uint c)
         {
-            IntPtr ret = wrap_unctrl(c);
+            IntPtr ret = NativeMethods.WRAP_unctrl(c);
             InternalException.Verify(ret, "unctrl");
             return Marshal.PtrToStringAnsi(ret);
         }
 
         internal static void filter()
         {
-            wrap_filter();
+            NativeMethods.WRAP_filter();
         }
 
         internal static void use_env(bool x)
         {
-            wrap_use_env(x);
+            NativeMethods.WRAP_use_env(x);
         }
 
         internal static void delay_output(int ms)
         {
-            int ret = wrap_delay_output(ms);
+            int ret = NativeMethods.WRAP_delay_output(ms);
             InternalException.Verify(ret, "delay_output");
         }
 
-		internal static void sendsigtstp()
-		{
-			wrap_sendsigtstp ();
-		}
+        internal static void sendsigtstp()
+        {
+            NativeMethods.WRAP_sendsigtstp();
+        }
+    }
 
-		[DllImport("CursesWrapper")]
-		private static extern void wrap_sendsigtstp ();
-		[DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_unctrl(uint c);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_filter();
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_use_env(Boolean x);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_delay_output(int ms);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_sendsigtstp();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_unctrl(uint c);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_filter();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_use_env(Boolean x);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_delay_output(int ms);
     }
 }

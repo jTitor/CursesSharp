@@ -30,21 +30,24 @@ namespace CursesSharp.Internal
     {
         internal static int winnstr(IntPtr win, StringBuilder str, int n)
         {
-            int ret = wrap_winnstr(win, str, n);
+            int ret = NativeMethods.WRAP_winnstr(win, str, n);
             InternalException.Verify(ret, "winnstr");
             return ret;
         }
 
         internal static int mvwinnstr(IntPtr win, int y, int x, StringBuilder str, int n)
         {
-            int ret = wrap_mvwinnstr(win, y, x, str, n);
+            int ret = NativeMethods.WRAP_mvwinnstr(win, y, x, str, n);
             InternalException.Verify(ret, "mvwinnstr");
             return ret;
         }
+    }
 
-        [DllImport("CursesWrapper", CharSet = CharSet.Unicode)]
-        private static extern int wrap_winnstr(IntPtr win, StringBuilder str, int n);
-        [DllImport("CursesWrapper", CharSet = CharSet.Unicode)]
-        private static extern int wrap_mvwinnstr(IntPtr win, int y, int x, StringBuilder str, int n);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        internal static extern int WRAP_winnstr(IntPtr win, StringBuilder str, int n);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
+        internal static extern int WRAP_mvwinnstr(IntPtr win, int y, int x, StringBuilder str, int n);
     }
 }

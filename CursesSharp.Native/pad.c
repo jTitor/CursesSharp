@@ -22,31 +22,31 @@
 
 
 WRAP_API WINDOW *
-wrap_newpad(int nlines, int ncols)
+WRAP_newpad(int nlines, int ncols)
 {
 	return newpad(nlines, ncols);
 }
 
 WRAP_API WINDOW *
-wrap_subpad(WINDOW *orig, int nlines, int ncols, int begy, int begx)
+WRAP_subpad(WINDOW *orig, int nlines, int ncols, int begy, int begx)
 {
 	return subpad(orig, nlines, ncols, begy, begx);
 }
 
 WRAP_API int
-wrap_prefresh(WINDOW *win, int py, int px, int sy1, int sx1, int sy2, int sx2)
+WRAP_prefresh(WINDOW *win, int py, int px, int sy1, int sx1, int sy2, int sx2)
 {
 	return prefresh(win, py, px, sy1, sx1, sy2, sx2);
 }
 
 WRAP_API int
-wrap_pnoutrefresh(WINDOW *win, int py, int px, int sy1, int sx1, int sy2, int sx2)
+WRAP_pnoutrefresh(WINDOW *win, int py, int px, int sy1, int sx1, int sy2, int sx2)
 {
 	return pnoutrefresh(win, py, px, sy1, sx1, sy2, sx2);
 }
 
 WRAP_API int
-wrap_pechochar(WINDOW *pad, unsigned int ch)
+WRAP_pechochar(WINDOW *pad, unsigned int ch)
 {
 	return pechochar(pad, ch);
 }

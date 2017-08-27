@@ -22,13 +22,13 @@
 
 
 WRAP_API const char *
-wrap_keyname(int key)
+WRAP_keyname(int key)
 {
 	return keyname(key);
 }
 
 WRAP_API int
-wrap_has_key(int key)
+WRAP_has_key(int key)
 {
 	return has_key(key);
 }

@@ -22,19 +22,19 @@
 
 
 WRAP_API int
-wrap_waddch(WINDOW *win, unsigned int ch)
+WRAP_waddch(WINDOW *win, unsigned int ch)
 {
 	return waddch(win, ch);
 }
 
 WRAP_API int
-wrap_mvwaddch(WINDOW *win, int y, int x, unsigned int ch)
+WRAP_mvwaddch(WINDOW *win, int y, int x, unsigned int ch)
 {
 	return mvwaddch(win, y, x, ch);
 }
 
 WRAP_API int
-wrap_wechochar(WINDOW *win, unsigned int ch)
+WRAP_wechochar(WINDOW *win, unsigned int ch)
 {
 	return wechochar(win, ch);
 }

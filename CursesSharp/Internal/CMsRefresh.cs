@@ -29,43 +29,46 @@ namespace CursesSharp.Internal
     {
         internal static void wrefresh(IntPtr win)
         {
-            int ret = wrap_wrefresh(win);
+            int ret = NativeMethods.WRAP_wrefresh(win);
             InternalException.Verify(ret, "wrefresh");
         }
 
         internal static void wnoutrefresh(IntPtr win)
         {
-            int ret = wrap_wnoutrefresh(win);
+            int ret = NativeMethods.WRAP_wnoutrefresh(win);
             InternalException.Verify(ret, "wnoutrefresh");
         }
 
         internal static void doupdate()
         {
-            int ret = wrap_doupdate();
+            int ret = NativeMethods.WRAP_doupdate();
             InternalException.Verify(ret, "doupdate");
         }
 
         internal static void redrawwin(IntPtr win)
         {
-            int ret = wrap_redrawwin(win);
+            int ret = NativeMethods.WRAP_redrawwin(win);
             InternalException.Verify(ret, "redrawwin");
         }
 
         internal static void wredrawln(IntPtr win, int beg_line, int num_lines)
         {
-            int ret = wrap_wredrawln(win, beg_line, num_lines);
+            int ret = NativeMethods.WRAP_wredrawln(win, beg_line, num_lines);
             InternalException.Verify(ret, "wredrawln");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wrefresh(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wnoutrefresh(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_doupdate();
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_redrawwin(IntPtr win);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wredrawln(IntPtr win, int beg_line, int num_lines);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wrefresh(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wnoutrefresh(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_doupdate();
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_redrawwin(IntPtr win);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wredrawln(IntPtr win, int beg_line, int num_lines);
     }
 }

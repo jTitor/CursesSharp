@@ -29,27 +29,31 @@ namespace CursesSharp.Internal
     {
         internal static void waddch(IntPtr win, uint ch)
         {
-            int ret = wrap_waddch(win, ch);
+            int ret = NativeMethods.WRAP_waddch(win, ch);
             InternalException.Verify(ret, "waddch");
         }
 
         internal static void mvwaddch(IntPtr win, int y, int x, uint ch)
         {
-            int ret = wrap_mvwaddch(win, y, x, ch);
+            int ret = NativeMethods.WRAP_mvwaddch(win, y, x, ch);
             InternalException.Verify(ret, "mvwaddch");
         }
 
         internal static void wechochar(IntPtr win, uint ch)
         {
-            int ret = wrap_wechochar(win, ch);
+            int ret = NativeMethods.WRAP_wechochar(win, ch);
             InternalException.Verify(ret, "wechochar");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wechochar(IntPtr win, uint ch);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_waddch(IntPtr win, uint ch);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_mvwaddch(IntPtr win, int y, int x, uint ch);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        [return: MarshalAs(UnmanagedType.I4)]
+        internal static extern int WRAP_wechochar(IntPtr win, uint ch);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_waddch(IntPtr win, uint ch);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_mvwaddch(IntPtr win, int y, int x, uint ch);
     }
 }

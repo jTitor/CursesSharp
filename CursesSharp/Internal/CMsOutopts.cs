@@ -29,57 +29,60 @@ namespace CursesSharp.Internal
     {
         internal static void clearok(IntPtr win, bool bf)
         {
-            int ret = wrap_clearok(win, bf);
+            int ret = NativeMethods.WRAP_clearok(win, bf);
             InternalException.Verify(ret, "clearok");
         }
 
         internal static void idlok(IntPtr win, bool bf)
         {
-            int ret = wrap_idlok(win, bf);
+            int ret = NativeMethods.WRAP_idlok(win, bf);
             InternalException.Verify(ret, "idlok");
         }
 
         internal static void idcok(IntPtr win, bool bf)
         {
-            wrap_idcok(win, bf);
+            NativeMethods.WRAP_idcok(win, bf);
         }
 
         internal static void immedok(IntPtr win, bool bf)
         {
-            wrap_immedok(win, bf);
+            NativeMethods.WRAP_immedok(win, bf);
         }
 
         internal static void leaveok(IntPtr win, bool bf)
         {
-            int ret = wrap_leaveok(win, bf);
+            int ret = NativeMethods.WRAP_leaveok(win, bf);
             InternalException.Verify(ret, "leaveok");
         }
 
         internal static void wsetscrreg(IntPtr win, int top, int bot)
         {
-            int ret = wrap_wsetscrreg(win, top, bot);
+            int ret = NativeMethods.WRAP_wsetscrreg(win, top, bot);
             InternalException.Verify(ret, "wsetscrreg");
         }
 
         internal static void scrollok(IntPtr win, bool bf)
         {
-            int ret = wrap_scrollok(win, bf);
+            int ret = NativeMethods.WRAP_scrollok(win, bf);
             InternalException.Verify(ret, "scrollok");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_clearok(IntPtr win, Boolean bf);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_idlok(IntPtr win, Boolean bf);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_idcok(IntPtr win, Boolean bf);
-        [DllImport("CursesWrapper")]
-        private static extern void wrap_immedok(IntPtr win, Boolean bf);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_leaveok(IntPtr win, Boolean bf);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_wsetscrreg(IntPtr win, int top, int bot);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_scrollok(IntPtr win, Boolean bf);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_clearok(IntPtr win, Boolean bf);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_idlok(IntPtr win, Boolean bf);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_idcok(IntPtr win, Boolean bf);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern void WRAP_immedok(IntPtr win, Boolean bf);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_leaveok(IntPtr win, Boolean bf);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_wsetscrreg(IntPtr win, int top, int bot);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_scrollok(IntPtr win, Boolean bf);
     }
 }

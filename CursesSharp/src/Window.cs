@@ -2,9 +2,9 @@
 
 /*
  * CursesSharp
- * 
+ *
  * Copyright 2009 Robert Konklewski
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or (at your
@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #endregion
@@ -33,31 +33,31 @@ namespace CursesSharp
         {
             return new Window(handle, false);
         }
-			
+
         public Window(int nlines, int ncols, int begy, int begx)
         {
             this.Handle = CursesMethods.newwin(nlines, ncols, begy, begx);
         }
 
-		public static Window StandardScreen()
-		{
-			return Window.WrapHandle (CursesMethods.stdscr ());
-		}
+    public static Window StandardScreen()
+    {
+      return Window.WrapHandle (CursesMethods.stdscr ());
+    }
 
-		public static Window CurrentScreen()
-		{
-			return Window.WrapHandle (CursesMethods.curscr ());
-		}
+    public static Window CurrentScreen()
+    {
+      return Window.WrapHandle (CursesMethods.curscr ());
+    }
 
-		public static Window NewScreen()
-		{
-			return Window.WrapHandle (CursesMethods.newscr ());
-		}
+    public static Window NewScreen()
+    {
+      return Window.WrapHandle (CursesMethods.newscr ());
+    }
 
-		public static Window NewWindow()
-		{
-			return Window.WrapHandle (CursesMethods.curscr ());
-		}
+    public static Window NewWindow()
+    {
+      return Window.WrapHandle (CursesMethods.curscr ());
+    }
 
         private Window(IntPtr handle, bool ownsPtr)
             : base(handle, ownsPtr)

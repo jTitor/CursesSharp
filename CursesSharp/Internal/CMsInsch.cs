@@ -29,19 +29,22 @@ namespace CursesSharp.Internal
     {
         internal static void winsch(IntPtr win, uint ch)
         {
-            int ret = wrap_winsch(win, ch);
+            int ret = NativeMethods.WRAP_winsch(win, ch);
             InternalException.Verify(ret, "winsch");
         }
 
         internal static void mvwinsch(IntPtr win, int y, int x, uint ch)
         {
-            int ret = wrap_mvwinsch(win, y, x, ch);
+            int ret = NativeMethods.WRAP_mvwinsch(win, y, x, ch);
             InternalException.Verify(ret, "mvwinsch");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_winsch(IntPtr win, uint ch);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_mvwinsch(IntPtr win, int y, int x, uint ch);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_winsch(IntPtr win, uint ch);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_mvwinsch(IntPtr win, int y, int x, uint ch);
     }
 }

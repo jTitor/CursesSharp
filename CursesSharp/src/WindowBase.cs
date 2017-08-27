@@ -2,9 +2,9 @@
 
 /*
  * CursesSharp
- * 
+ *
  * Copyright 2009 Robert Konklewski
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or (at your
@@ -17,7 +17,7 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * www.gnu.org/licenses/>.
- * 
+ *
  */
 
 #endregion
@@ -32,7 +32,7 @@ namespace CursesSharp
     /// <summary>
     /// Represents the greatest common factor between windows and pads.
     /// </summary>
-    public abstract class WindowBase: IDisposable
+    public abstract class WindowBase : IDisposable
     {
         internal const int DEFAULT_BUFSZ = 1023;
 
@@ -54,7 +54,7 @@ namespace CursesSharp
         protected internal IntPtr Handle
         {
             get { return this.winptr; }
-            set 
+            set
             {
                 Debug.Assert(this.winptr == IntPtr.Zero);
                 this.winptr = value;
@@ -62,10 +62,10 @@ namespace CursesSharp
             }
         }
 
-		public IntPtr PublicHandle
-		{
-			get { return this.winptr; }
-		}
+        public IntPtr PublicHandle
+        {
+            get { return this.winptr; }
+        }
 
         #region IDisposable Members
 
@@ -75,14 +75,12 @@ namespace CursesSharp
         /// </summary>
         public void Dispose()
         {
-            this.DisposeImpl();
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        #endregion
-
         /// <summary>
-        /// Disposes the window during finalization, if it hasn't been 
+        /// Disposes the window during finalization, if it hasn't been
         /// disposed earlier.
         /// </summary>
         /// <remarks>
@@ -93,20 +91,29 @@ namespace CursesSharp
         /// </remarks>
         ~WindowBase()
         {
-#if DEBUG
-            Debug.Assert(this.winptr == IntPtr.Zero, "Window not disposed");
-#endif
-            this.DisposeImpl();
+            // Finalizer calls Dispose(false)
+            Dispose(false);
         }
 
-        private void DisposeImpl()
+        /// <summary>
+        /// The bulk of the clean-up code is implemented in Dispose(bool)
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
         {
-            if (this.winptr != IntPtr.Zero && this.ownsPtr)
+            if (disposing)
             {
-                CursesMethods.delwin(this.winptr);
-                this.winptr = IntPtr.Zero;
+                // free managed resources
+            }
+            // free native resources if there are any.
+            if (this.winptr != IntPtr.Zero)
+            {
+                CursesMethods.delwin(winptr);
+                winptr = IntPtr.Zero;
             }
         }
+
+        #endregion
 
         #region Text attributes
 
@@ -114,9 +121,7 @@ namespace CursesSharp
         {
             get
             {
-                uint attrs;
-                short color_pair;
-                CursesMethods.wattr_get(this.winptr, out attrs, out color_pair);
+                CursesMethods.wattr_get(this.winptr, out uint attrs, out short color_pair);
                 return attrs;
             }
             set
@@ -129,9 +134,7 @@ namespace CursesSharp
         {
             get
             {
-                uint attrs;
-                short color_pair;
-                CursesMethods.wattr_get(this.winptr, out attrs, out color_pair);
+                CursesMethods.wattr_get(this.winptr, out uint attrs, out short color_pair);
                 return color_pair;
             }
             set
@@ -159,13 +162,13 @@ namespace CursesSharp
         }
 
         /// <summary>
-        /// Represents the state of user's terminal keypad. 
+        /// Represents the state of user's terminal keypad.
         /// </summary>
         /// <remarks>
         /// <para>
         /// If enabled (set to true), the user can press a function key
-        /// (such as an arrow key) and <see cref="GetChar()"/> returns a single 
-        /// value representing the function key, as in <see cref="Keys.LEFT"/>. 
+        /// (such as an arrow key) and <see cref="GetChar()"/> returns a single
+        /// value representing the function key, as in <see cref="Keys.LEFT"/>.
         /// </para>
         /// <para>
         /// If disabled (set to false), curses does not treat function keys
@@ -241,7 +244,7 @@ namespace CursesSharp
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int ReadTimeout
         {
@@ -368,8 +371,7 @@ namespace CursesSharp
 
         public void Add(string str, int n)
         {
-
-			CursesMethods.waddnstr(this.winptr, str, n);
+            CursesMethods.waddnstr(this.winptr, str, n);
         }
 
         public void Add(int y, int x, string str)

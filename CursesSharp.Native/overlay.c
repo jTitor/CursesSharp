@@ -22,19 +22,19 @@
 
 
 WRAP_API int
-wrap_overlay(WINDOW *src_w, WINDOW *dst_w)
+WRAP_overlay(WINDOW *src_w, WINDOW *dst_w)
 {
 	return overlay(src_w, dst_w);
 }
 
 WRAP_API int
-wrap_overwrite(WINDOW *src_w, WINDOW *dst_w)
+WRAP_overwrite(WINDOW *src_w, WINDOW *dst_w)
 {
 	return overwrite(src_w, dst_w);
 }
 
 WRAP_API int
-wrap_copywin(WINDOW *src_w, WINDOW *dst_w, int src_tr, int src_tc, int dst_tr,
+WRAP_copywin(WINDOW *src_w, WINDOW *dst_w, int src_tr, int src_tc, int dst_tr,
 			 int dst_tc, int dst_br, int dst_bc, int overlay)
 {
 	return copywin(src_w, dst_w, src_tr, src_tc, dst_tr, dst_tc, dst_br, dst_bc, overlay);

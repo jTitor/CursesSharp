@@ -23,7 +23,7 @@
 
 
 WRAP_API int
-wrap_wgetnstr(WINDOW *win, uchar2 *str, int n)
+WRAP_wgetnstr(WINDOW *win, uchar2 *str, int n)
 {
 #if defined(CURSES_WIDE) && SIZEOF_WCHAR_T == 2
 	return wgetn_wstr(win, (wint_t*)str, n);
@@ -79,7 +79,7 @@ do_exit:
 }
 
 WRAP_API int
-wrap_mvwgetnstr(WINDOW *win, int y, int x, uchar2 *str, int n)
+WRAP_mvwgetnstr(WINDOW *win, int y, int x, uchar2 *str, int n)
 {
 #if defined(CURSES_WIDE) && SIZEOF_WCHAR_T == 2
 	return mvwgetn_wstr(win, y, x, (wint_t*)str, n);

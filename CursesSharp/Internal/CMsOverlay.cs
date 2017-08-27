@@ -29,27 +29,30 @@ namespace CursesSharp.Internal
     {
         internal static void overlay(IntPtr src_w, IntPtr dst_w)
         {
-            int ret = wrap_overlay(src_w, dst_w);
+            int ret = NativeMethods.WRAP_overlay(src_w, dst_w);
             InternalException.Verify(ret, "overlay");
         }
 
         internal static void overwrite(IntPtr src_w, IntPtr dst_w)
         {
-            int ret = wrap_overwrite(src_w, dst_w);
+            int ret = NativeMethods.WRAP_overwrite(src_w, dst_w);
             InternalException.Verify(ret, "overwrite");
         }
 
         internal static void copywin(IntPtr src_w, IntPtr dst_w, int src_tr, int src_tc, int dst_tr, int dst_tc, int dst_br, int dst_bc, bool overlay)
         {
-            int ret = wrap_copywin(src_w, dst_w, src_tr, src_tc, dst_tr, dst_tc, dst_br, dst_bc, overlay);
+            int ret = NativeMethods.WRAP_copywin(src_w, dst_w, src_tr, src_tc, dst_tr, dst_tc, dst_br, dst_bc, overlay);
             InternalException.Verify(ret, "copywin");
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_overlay(IntPtr src_w, IntPtr dst_w);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_overwrite(IntPtr src_w, IntPtr dst_w);
-        [DllImport("CursesWrapper")]
-        private static extern int wrap_copywin(IntPtr src_w, IntPtr dst_w, int src_tr, int src_tc, int dst_tr, int dst_tc, int dst_br, int dst_bc, Boolean overlay);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_overlay(IntPtr src_w, IntPtr dst_w);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_overwrite(IntPtr src_w, IntPtr dst_w);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern int WRAP_copywin(IntPtr src_w, IntPtr dst_w, int src_tr, int src_tc, int dst_tr, int dst_tc, int dst_br, int dst_bc, Boolean overlay);
     }
 }

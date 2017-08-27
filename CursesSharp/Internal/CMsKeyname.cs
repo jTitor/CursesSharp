@@ -29,19 +29,22 @@ namespace CursesSharp.Internal
     {
         internal static string keyname(int key)
         {
-            IntPtr ret = wrap_keyname(key);
+            IntPtr ret = NativeMethods.WRAP_keyname(key);
             InternalException.Verify(ret, "keyname");
             return Marshal.PtrToStringAnsi(ret);
         }
 
         internal static bool has_key(int key)
         {
-            return wrap_has_key(key);
+            return NativeMethods.WRAP_has_key(key);
         }
+    }
 
-        [DllImport("CursesWrapper")]
-        private static extern IntPtr wrap_keyname(int key);
-        [DllImport("CursesWrapper")]
-        private static extern Boolean wrap_has_key(int key);
+    internal static partial class NativeMethods
+    {
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern IntPtr WRAP_keyname(int key);
+        [DllImport("CursesSharp.Native.dll", CallingConvention = CallingConvention.Cdecl)]
+        internal static extern Boolean WRAP_has_key(int key);
     }
 }
