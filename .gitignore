@@ -4,3 +4,4 @@ obj
 *.pc
 x86
 x64
+**/pdcurses
