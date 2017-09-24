@@ -33,6 +33,9 @@ API to curses than the original one, although function names remain unchanged fo
 *Documentation is (always) under construction. Help would be much appreciated.*
 
 ## Installing CursesSharp...
+
+No matter the platform, first get this project's source with `git clone https://github.com/sushihangover/CursesSharp.git`.
+
 ### ...on MacOS
 
 These are the instructions for building CursesSharp on MacOS. 
@@ -59,18 +62,12 @@ The native library is now built as a 'fat' library so either a Mono 32-bit or 64
 **
 -->
 
-#### 1. Getting CursesSharp
-
-You can clone it from the following repository:
-
-    https://github.com/sushihangover/CursesSharp.git
-
-#### 2. Make the Native Library
+#### 1. Make the Native Library
 
 	mdtool build CursesSharp.Native.sln --target:Build --configuration:Release
 	mdtool build CursesSharp.Native.sln --target:Build --configuration:Debug
 
-#### 3. Make the C# Libraries and Demos
+#### 2. Make the C# Libraries and Demos
 
 	xbuild CursesSharp.sln /target:Clean
 	xbuild CursesSharp.sln /target:Build
@@ -99,18 +96,12 @@ Install some dependencies:
 	sudo apt-get install lib32ncurses5-dev
 	sudo apt-get install ncurses-doc
 
-#### 1. Getting CursesSharp
-
-You will have to obtain CursesSharp sources. You clone it from the following repository:
-
-    https://github.com/sushihangover/CursesSharp.git
-
-#### 2. Make the Native Library
+#### 1. Make the Native Library
 
 	mdtool build CursesSharp.Native.Linux.sln --target:Build --configuration:Release
 	mdtool build CursesSharp.Native.Linux.sln --target:Build --configuration:Debug
 
-#### 3. Make the C# Libraries and Demos
+#### 2. Make the C# Libraries and Demos
 
 	xbuild CursesSharp.sln /target:Clean /property:configuration=Debug
 	xbuild CursesSharp.sln /target:Build /property:configuration=Debug
@@ -119,7 +110,9 @@ You will have to obtain CursesSharp sources. You clone it from the following rep
 
 Based on the original CursesSharp instructions [here](http://curses-sharp.sourceforge.net/index.php?page=windows):
 
-* Get the PDCurses source from the [SourceForge page](http://pdcurses.sourceforge.net). 3.4 is used by the original fork.
+* Get the PDCurses source from one of two places:
+  * The [GitHub repo](https://github.com/wmcbrine/PDCurses), which is for PDCurse's beta releases (clone with `git clone https://github.com/wmcbrine/PDCurses.git`);
+  * Or the [SourceForge page](http://pdcurses.sourceforge.net), for their stable releases. 3.4 is used by the original CursesSharp.
 * Make the static library:
 ```
 cd win32
