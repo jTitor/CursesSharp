@@ -187,7 +187,17 @@ To learn more about `ld` check out the `man` page:
 
 ## Installing CursesSharp on Windows
 
-Refer the original Windows project, source code and instructions are [here](http://curses-sharp.sourceforge.net/index.php?page=windows)
+Based on the original CursesSharp instructions [here](http://curses-sharp.sourceforge.net/index.php?page=windows):
+
+* Get the PDCurses source from the [SourceForge page](http://pdcurses.sourceforge.net). 3.4 is used by the original fork.
+* Make the static library:
+```
+cd win32
+nmake -f vcwin32.mak WIDE=Y
+```
+* You should now have a `pdcurses.lib` file; copy that to `(CursesSharp folder)\pdcurses\pdcurses.lib`.
+* Also copy `curses.h`, `panel.h`, and `term.h` to `(CursesSharp folder)\pdcurses`.
+* Now the CursesSharp build can run.
 
 ## CI
 
