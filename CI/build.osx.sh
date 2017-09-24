@@ -11,4 +11,3 @@ xbuild CursesSharp.sln /target:Clean /property:configuration=Debug
 # Build CIL assemblies
 xbuild CursesSharp.sln /target:Build /property:configuration=Release
 xbuild CursesSharp.sln /target:Build /property:configuration=Debug
-
