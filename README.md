@@ -43,7 +43,7 @@ The build process has been tested on:
 * Apple LLVM version 7.0.0 (clang-700.1.76)
 * Mono JIT compiler version 4.2.1 64-bit build.
 
-### 0. Prerequisites
+#### 0. Prerequisites
 
 The native library is now built as a 'fat' library so either a Mono 32-bit or 64-bit build can be used.
 
