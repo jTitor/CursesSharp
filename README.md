@@ -115,7 +115,7 @@ Based on the original CursesSharp instructions [here](http://curses-sharp.source
   * Or the [SourceForge page](http://pdcurses.sourceforge.net), for their stable releases. 3.4 is used by the original CursesSharp.
 * Make the static library:
 ```
-cd win32
+cd (PDCurses folder)\win32
 nmake -f vcwin32.mak WIDE=Y
 ```
 * You should now have a `pdcurses.lib` file; copy that to `(CursesSharp folder)\pdcurses\pdcurses.lib`.
