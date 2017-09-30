@@ -15,11 +15,11 @@ foreach($path in $allPaths) {
 	$command = "where {0}" -f $path
 	$foundPath = Invoke-Expression $command
 	if(-not ($?)) {
-		Write-Error "Couldn't find {0}!" -f $path
+		Write-Error ("Couldn't find {0}!" -f $path)
 		$canContinue = $false
 	}
 	else {
-		Write-Debug "Found {0} at {1}" -f $path, $foundPath
+		Write-Debug ("Found {0} at {1}" -f ($path, $foundPath))
 	}
 }
 #If not, fail here
@@ -37,7 +37,7 @@ $needToBuildPdCurses = $false
 foreach($f in $pdCursesFiles) {
 	$filePath = "../pdcurses/{0}" -f $f
 	if(-not (Test-Path $f)) {
-		Write-Output "Missing PDCurses file {0}, will need to rebuild" -f $filePath
+		Write-Output ("Missing PDCurses file {0}, will need to rebuild" -f $filePath)
 		$needToBuildPdCurses = $true
 		break
 	}
