@@ -34,7 +34,7 @@ if(-not ($canContinue)) {
 #	* term.h
 $pdCursesFiles = "pdcurses.lib", "curses.h", "panel.h", "term.h"
 $needToBuildPdCurses = $false
-foreach($f in $pdCursesFile) {
+foreach($f in $pdCursesFiles) {
 	$filePath = "../pdcurses/{0}" -f $f
 	if(-not (Test-Path $f)) {
 		Write-Output "Missing PDCurses file {0}, will need to rebuild" -f $filePath
