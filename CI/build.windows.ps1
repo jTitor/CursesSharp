@@ -43,7 +43,7 @@ foreach($f in $pdCursesFiles) {
 	}
 }
 #If not:
-if(-not ($needToBuildPdCurses)) {
+if($needToBuildPdCurses) {
 	#Clone PDCurses from Github
 	$pdCursesRepoPath = "..\..\PDCurses"
 	if(-not(Test-Path $pdCursesRepoPath)) {
@@ -76,15 +76,32 @@ if(-not ($needToBuildPdCurses)) {
 	}
 }
 
+foreach($f in $pdCursesFiles) {
+	$filePath = "../pdcurses/{0}" -f $f
+	if(-not (Test-Path $f)) {
+		Write-Output ("Attempted build of PDCurses, but still missing PDCurses file {0}! Can't continue" -f $filePath)
+		return 1
+	}
+}
+
+function build-project($taskString, $configString) {
+	$invocation = "dotnet msbuild CursesSharp.Native.sln /t:$taskString /p:Configuration=$configString"
+	Invoke-Expression $invocation
+	if(-not($?)) {
+		Write-Error "Build request '$invocation' failed, can't continue"
+		return 1
+	}
+}
+
 # Clean native assemblies
-&dotnet msbuild CursesSharp.Native.sln /t:Clean /p:Configuration=Release
-&dotnet msbuild CursesSharp.Native.sln /t:Clean /p:Configuration=Debug
+build-project("Clean", "Release")
+build-project("Clean", "Debug")
 # Build native assemblies
-&dotnet msbuild CursesSharp.Native.sln /t:Build /p:Configuration=Release
-&dotnet msbuild CursesSharp.Native.sln /t:Build /p:Configuration=Debug
+build-project("Build", "Release")
+build-project("Build", "Debug")
 # Clean CLI assemblies
-&dotnet msbuild CursesSharp.sln /t:Clean /p:Configuration=Release
-&dotnet msbuild CursesSharp.sln /t:Clean /p:Configuration=Debug
+build-project("Clean", "Release")
+build-project("Clean", "Debug")
 # Build CLI assemblies
-&dotnet msbuild CursesSharp.sln /t:Build /p:Configuration=Release
-&dotnet msbuild CursesSharp.sln /t:Build /p:Configuration=Debug
+build-project("Build", "Release")
+build-project("Build", "Debug")
