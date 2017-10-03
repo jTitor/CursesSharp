@@ -7,6 +7,8 @@
 #	* dotnet is 2.0 or above so SLN to msbuild works
 #	* vcvarsall.bat exists (NMake and Cl.exe will likely be there if the vars batch is too)
 #		* It's most likely in "$env:programfiles\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat".
+#		* Check for terminal instead - "$env:programfiles\Microsoft Visual Studio\2017\(EDITION)\Common7\Tools\VsDevCmd.bat",
+#		  where (EDITION) can be "Community", "BuildTools", or "Enterprise"
 $canContinue = $true
 $dotNetPath = "dotnet"
 $vsVarsAllPath = "'$env:programfiles\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat'"
