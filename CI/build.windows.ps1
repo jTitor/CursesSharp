@@ -11,7 +11,8 @@
 #		  where (EDITION) can be "Community", "BuildTools", or "Enterprise"
 $canContinue = $true
 $dotNetPath = "dotnet"
-$vsVarsAllPath = "'$env:programfiles\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat'"
+$vsVarsAllPath = "$env:programfiles\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
+$vsVarsAllFlags = "x86_amd64"
 $allPaths = $dotNetPath, $vsVarsAllPath
 foreach($path in $allPaths) {
 	$command = "where {0}" -f $path
@@ -56,16 +57,16 @@ if($needToBuildPdCurses) {
 		}
 	}
 	#Build pdcurses:
-	Invoke-Expression $vsVarsAllPath
-
 	$prevPwd = "$pwd"
+
 	Set-Location "$pdCursesRepoPath\win32"
-	Invoke-Expression "nmake -f vcwin32.mak WIDE=Y"
-	if(-not($?)) {
+	cmd /C "`"$vsVarsAllPath`" $vsVarsAllFlags & nmake -f vcwin32.mak WIDE=Y"
+	$buildError = $?
+	Set-Location $prevPwd
+	if(-not($buildError)) {
 		Write-Error "Failed to build PDCurses, can't continue run"
 		return 1
 	}
-	Set-Location $prevPwd
 	# Copy .lib (.../win32/pdcurses.lib) and headers to ./pdcurses
 	$pdCursesResourcePath = "../PDCurses"
 	if(-not(Test-Path $pdCursesResourcePath)) {
