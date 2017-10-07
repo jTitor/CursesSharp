@@ -87,8 +87,7 @@ foreach($f in $pdCursesFiles) {
 	}
 }
 
-function build-project($taskString, $configString) {
-	$invocation = "dotnet msbuild CursesSharp.Native.sln /t:$taskString /p:Configuration=$configString"
+function invoke-build-project($invocation) {
 	Invoke-Expression $invocation
 	if(-not($?)) {
 		Write-Error "Build request '$invocation' failed, can't continue"
@@ -96,15 +95,25 @@ function build-project($taskString, $configString) {
 	}
 }
 
+function build-project-native($taskString, $configString) {
+	$invocation = "dotnet msbuild CursesSharp.Native.sln /t:$taskString /p:Configuration=$configString"
+	return invoke-build-project($invocation)
+}
+
+function build-project-cli($taskString, $configString) {
+	$invocation = "dotnet msbuild CursesSharp.sln /t:$taskString /p:Configuration=$configString"
+	return invoke-build-project($invocation)
+}
+
 # Clean native assemblies
-build-project("Clean", "Release")
-build-project("Clean", "Debug")
+build-project-native("Clean", "Release")
+build-project-native("Clean", "Debug")
 # Build native assemblies
-build-project("Build", "Release")
-build-project("Build", "Debug")
+build-project-native("Build", "Release")
+build-project-native("Build", "Debug")
 # Clean CLI assemblies
-build-project("Clean", "Release")
-build-project("Clean", "Debug")
+build-project-cli("Clean", "Release")
+build-project-cli("Clean", "Debug")
 # Build CLI assemblies
-build-project("Build", "Release")
-build-project("Build", "Debug")
+build-project-cli("Build", "Release")
+build-project-cli("Build", "Debug")
