@@ -10,6 +10,7 @@
 #		* Check for terminal instead - "$env:programfiles\Microsoft Visual Studio\2017\(EDITION)\Common7\Tools\VsDevCmd.bat",
 #		  where (EDITION) can be "Community", "BuildTools", or "Enterprise"
 $canContinue = $true
+$scriptPath = Split-Path -parent $PSCommandPath
 $dotNetPath = "dotnet"
 $vsVarsAllPath = "$env:programfiles\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
 $vsVarsAllFlags = "x86_amd64"
@@ -38,7 +39,7 @@ if(-not ($canContinue)) {
 $pdCursesFiles = "pdcurses.lib", "curses.h", "panel.h", "term.h"
 $needToBuildPdCurses = $false
 foreach($f in $pdCursesFiles) {
-	$filePath = "../pdcurses/{0}" -f $f
+	$filePath = "$scriptPath/../pdcurses/{0}" -f $f
 	if(-not (Test-Path $f)) {
 		Write-Output ("Missing PDCurses file {0}, will need to rebuild" -f $filePath)
 		$needToBuildPdCurses = $true
@@ -48,7 +49,7 @@ foreach($f in $pdCursesFiles) {
 #If not:
 if($needToBuildPdCurses) {
 	#Clone PDCurses from Github
-	$pdCursesRepoPath = "..\..\PDCurses"
+	$pdCursesRepoPath = "$scriptPath\..\..\PDCurses"
 	if(-not(Test-Path $pdCursesRepoPath)) {
 		Invoke-Expression "git clone https://github.com/wmcbrine/PDCurses.git ../../PDCurses"
 		if(-not($?)) {
@@ -68,9 +69,9 @@ if($needToBuildPdCurses) {
 		return 1
 	}
 	# Copy .lib (.../win32/pdcurses.lib) and headers to ./pdcurses
-	$pdCursesResourcePath = "../PDCurses"
+	$pdCursesResourcePath = "$scriptPath/../pdcurses"
 	if(-not(Test-Path $pdCursesResourcePath)) {
-		mkdir $pdCursesRepoPath
+		mkdir $pdCursesResourcePath
 	}
 	Copy-Item "$pdCursesRepoPath\win32\pdCurses.lib", "$pdCursesRepoPath\curses.h", "$pdCursesRepoPath\panel.h", "$pdCursesRepoPath\term.h" -Destination $pdCursesResourcePath
 	if(-not($?)) {
@@ -80,7 +81,7 @@ if($needToBuildPdCurses) {
 }
 
 foreach($f in $pdCursesFiles) {
-	$filePath = "../pdcurses/{0}" -f $f
+	$filePath = "$scriptPath/../pdcurses/{0}" -f $f
 	if(-not (Test-Path $f)) {
 		Write-Output ("Attempted build of PDCurses, but still missing PDCurses file {0}! Can't continue" -f $filePath)
 		return 1
@@ -96,12 +97,12 @@ function invoke-build-project($invocation) {
 }
 
 function build-project-native($taskString, $configString) {
-	$invocation = "dotnet msbuild CursesSharp.Native.sln /t:$taskString /p:Configuration=$configString"
+	$invocation = "dotnet msbuild `"$scriptPath\..\CursesSharp.Native.sln`" /t:$taskString /p:Configuration=$configString"
 	return invoke-build-project($invocation)
 }
 
 function build-project-cli($taskString, $configString) {
-	$invocation = "dotnet msbuild CursesSharp.sln /t:$taskString /p:Configuration=$configString"
+	$invocation = "dotnet msbuild `"$scriptPath\..\CursesSharp.sln`" /t:$taskString /p:Configuration=$configString"
 	return invoke-build-project($invocation)
 }
 
