@@ -55,7 +55,7 @@ if($needToBuildPdCurses) {
 	Write-Output "Cloning PDCurses..."
 	$pdCursesRepoPath = "$scriptPath\..\..\PDCurses"
 	if(-not(Test-Path $pdCursesRepoPath)) {
-		Invoke-Expression "git clone https://github.com/wmcbrine/PDCurses.git ../../PDCurses"
+		Invoke-Expression "git clone https://github.com/wmcbrine/PDCurses.git `"$pdCursesRepoPath`""
 		if(-not($?)) {
 			Write-Output "Failed to clone PDCurses repo, can't continue run"
 			return 1
