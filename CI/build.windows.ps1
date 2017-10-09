@@ -66,7 +66,7 @@ if($needToBuildPdCurses) {
 
 	Write-Output "Building PDCurses"
 	Set-Location "`"$pdCursesRepoPath\win32`""
-	cmd /C `"`"$vsVarsAllPath`" $vsVarsAllFlags & nmake -f vcwin32.mak WIDE=Y`"
+	cmd /C `"`"$vsVarsAllPath`" $vsVarsAllFlags "&" nmake -f vcwin32.mak WIDE=Y`"
 	$buildError = $?
 	Set-Location $prevPwd
 	if(-not($buildError)) {
