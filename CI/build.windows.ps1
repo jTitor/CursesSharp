@@ -18,14 +18,14 @@ $allPaths = $dotNetPath, $vsVarsAllPath
 
 Write-Output "Searching for dev tools"
 foreach($path in $allPaths) {
-	$command = "where {0}" -f $path
+	$command = "where `"{0}`"" -f $path
 	$foundPath = Invoke-Expression $command
 	if(-not ($?)) {
-		Write-Output ("Couldn't find {0}!" -f $path)
+		Write-Output ("Couldn't find {0}!" -f "`"$path`"")
 		$canContinue = $false
 	}
 	else {
-		Write-Output ("Found {0} at {1}" -f ($path, $foundPath))
+		Write-Output ("Found {0} at {1}" -f ("`"$path`"", "`"$foundPath`""))
 	}
 }
 #If not, fail here
@@ -43,7 +43,7 @@ $pdCursesFiles = "pdcurses.lib", "curses.h", "panel.h", "term.h"
 $needToBuildPdCurses = $false
 foreach($f in $pdCursesFiles) {
 	$filePath = "$scriptPath\..\pdcurses\{0}" -f $f
-	if(-not (Test-Path $f)) {
+	if(-not (Test-Path "`"$f`"")) {
 		Write-Output ("Missing PDCurses file {0}, will need to rebuild" -f $filePath)
 		$needToBuildPdCurses = $true
 		break
@@ -65,8 +65,8 @@ if($needToBuildPdCurses) {
 	$prevPwd = "$pwd"
 
 	Write-Output "Building PDCurses"
-	Set-Location "$pdCursesRepoPath\win32"
-	cmd /C "`"$vsVarsAllPath`" $vsVarsAllFlags & nmake -f vcwin32.mak WIDE=Y"
+	Set-Location "`"$pdCursesRepoPath\win32`""
+	cmd /C `"`"$vsVarsAllPath`" $vsVarsAllFlags & nmake -f vcwin32.mak WIDE=Y`"
 	$buildError = $?
 	Set-Location $prevPwd
 	if(-not($buildError)) {
@@ -74,11 +74,11 @@ if($needToBuildPdCurses) {
 		return 1
 	}
 	# Copy .lib (.../win32/pdcurses.lib) and headers to ./pdcurses
-	$pdCursesResourcePath = "$scriptPath\..\pdcurses"
+	$pdCursesResourcePath = "`"$scriptPath\..\pdcurses`""
 	if(-not(Test-Path $pdCursesResourcePath)) {
 		mkdir $pdCursesResourcePath
 	}
-	Copy-Item "$pdCursesRepoPath\win32\pdCurses.lib", "$pdCursesRepoPath\curses.h", "$pdCursesRepoPath\panel.h", "$pdCursesRepoPath\term.h" -Destination $pdCursesResourcePath
+	Copy-Item "`"$pdCursesRepoPath\win32\pdCurses.lib`"", "`"$pdCursesRepoPath\curses.h`"", "`"$pdCursesRepoPath\panel.h`"", "`"$pdCursesRepoPath\term.h`"" -Destination $pdCursesResourcePath
 	if(-not($?)) {
 		Write-Output "Failed to copy PDCurses libraries, can't continue run"
 		return 1
@@ -88,7 +88,7 @@ if($needToBuildPdCurses) {
 foreach($f in $pdCursesFiles) {
 	$filePath = "$scriptPath\..\pdcurses\{0}" -f $f
 	if(-not (Test-Path $f)) {
-		Write-Output ("Attempted build of PDCurses, but still missing PDCurses file {0}! Can't continue" -f $filePath)
+		Write-Output ("Attempted build of PDCurses, but still missing PDCurses file '{0}'! Can't continue" -f $filePath)
 		return 1
 	}
 }
