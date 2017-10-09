@@ -19,8 +19,6 @@ $vsVarsAllFlags = "x86_amd64"
 $programFilesLocations = $env:programfiles, ${env:ProgramFiles(x86)}
 $vsVarsAllPathFmts = $vsVarsAllCommunityPathFmt, $vsVarsAllBuildToolsPathFmt
 
-$allPaths = $dotNetPath, $vsVarsAllPath
-
 Write-Output "Searching for dev tools"
 foreach($programFilesPath in $programFilesLocations) {
 	foreach($vsVarsPathFmt in $vsVarsAllPathFmts) {
@@ -34,6 +32,9 @@ if(-not ($vsVarsAllPath)) {
 	Write-Output ("Couldn't find Visual C++ build tools or a Visual Studio installation")
 	$canContinue = $false
 }
+
+$allPaths = $dotNetPath, $vsVarsAllPath
+
 foreach($path in $allPaths) {
 	$command = "where `"$path`""
 	$foundPath = Invoke-Expression $command
@@ -91,7 +92,7 @@ if($needToBuildPdCurses) {
 		return 1
 	}
 	# Copy .lib (.../win32/pdcurses.lib) and headers to ./pdcurses
-	$pdCursesResourcePath = "`"$scriptPath\..\pdcurses`""
+	$pdCursesResourcePath = "$scriptPath\..\pdcurses"
 	if(-not(Test-Path $pdCursesResourcePath)) {
 		mkdir $pdCursesResourcePath
 	}
