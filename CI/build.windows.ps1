@@ -57,7 +57,8 @@ if(-not ($canContinue)) {
 #	* panel.h
 #	* term.h
 Write-Output "Checking that PDCurses is built"
-$pdCursesFiles = "pdcurses.lib", "curses.h", "panel.h", "term.h"
+#Paths are case sensitive! pdCurses.lib can't be lowercased or it'll fail path testing
+$pdCursesFiles = "pdCurses.lib", "curses.h", "panel.h", "term.h"
 $needToBuildPdCurses = $false
 foreach($f in $pdCursesFiles) {
 	$filePath = "$scriptPath\..\pdcurses\$f"
