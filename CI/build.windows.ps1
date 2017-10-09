@@ -104,14 +104,6 @@ if($needToBuildPdCurses) {
 	}
 }
 
-foreach($f in $pdCursesFiles) {
-	$filePath = "$scriptPath\..\pdcurses\$f"
-	if(-not (Test-Path $f)) {
-		Write-Output ("Attempted build of PDCurses, but still missing PDCurses file '$filePath'! Can't continue")
-		return 1
-	}
-}
-
 Write-Output "Building CursesSharp assemblies"
 function invoke-build-project($invocation) {
 	Invoke-Expression $invocation
