@@ -12,11 +12,28 @@
 $canContinue = $true
 $scriptPath = Split-Path -parent $PSCommandPath
 $dotNetPath = "dotnet"
-$vsVarsAllPath = "$env:programfiles\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
+$vsVarsAllCommunityPathFmt = "{0}\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
+$vsVarsAllBuildToolsPathFmt = "{0}\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvarsall.bat"
+$vsVarsAllPath = ""
 $vsVarsAllFlags = "x86_amd64"
+$programFilesLocations = $env:programfiles, ${env:ProgramFiles(x86)}
+$vsVarsAllPathFmts = $vsVarsAllCommunityPathFmt, $vsVarsAllBuildToolsPathFmt
+
 $allPaths = $dotNetPath, $vsVarsAllPath
 
 Write-Output "Searching for dev tools"
+foreach($programFilesPath in $programFilesLocations) {
+	foreach($vsVarsPathFmt in $vsVarsAllPathFmts) {
+		$path = $vsVarsPathFmt -f $programFilesPath
+		if(Test-Path $path) {
+			$vsVarsAllPath = $path
+		}
+	}
+}
+if(-not ($vsVarsAllPath)) {
+	Write-Output ("Couldn't find Visual C++ build tools or a Visual Studio installation")
+	$canContinue = $false
+}
 foreach($path in $allPaths) {
 	$command = "where `"$path`""
 	$foundPath = Invoke-Expression $command
