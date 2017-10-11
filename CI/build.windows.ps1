@@ -105,7 +105,8 @@ if($needToBuildPdCurses) {
 }
 
 Write-Output "Building CursesSharp assemblies"
-function invoke-build-project($invocation) {
+function invoke-build-project($solutionAbsolutePath, $taskString, $configString) {
+	$invocation = "dotnet msbuild `"$solutionAbsolutePath`" /t:`"$taskString`" /p:Configuration=`"$configString`""
 	Invoke-Expression $invocation
 	if(-not($?)) {
 		Write-Output "Build request '$invocation' failed, can't continue"
@@ -114,13 +115,13 @@ function invoke-build-project($invocation) {
 }
 
 function build-project-native($taskString, $configString) {
-	$invocation = "dotnet msbuild `"$scriptPath\..\CursesSharp.Native.sln`" /t:$taskString /p:Configuration=$configString"
-	return invoke-build-project($invocation)
+	$solutionPath = Resolve-Path $scriptPath\..\CursesSharp.Native.sln
+	return invoke-build-project($solutionPath, $taskString, $configString)
 }
 
 function build-project-cli($taskString, $configString) {
-	$invocation = "dotnet msbuild `"$scriptPath\..\CursesSharp.sln`" /t:$taskString /p:Configuration=$configString"
-	return invoke-build-project($invocation)
+	$solutionPath = Resolve-Path $scriptPath\..\CursesSharp.sln
+	return invoke-build-project($solutionPath, $taskString, $configString)
 }
 
 # Clean native assemblies
