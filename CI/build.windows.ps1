@@ -29,7 +29,7 @@ foreach($programFilesPath in $programFilesLocations) {
 	}
 }
 if(-not ($vsVarsAllPath)) {
-	Write-Output ("Couldn't find Visual C++ build tools or a Visual Studio installation")
+	Write-Output "Couldn't find Visual C++ build tools or a Visual Studio installation"
 	$canContinue = $false
 }
 
@@ -39,11 +39,11 @@ foreach($path in $allPaths) {
 	$command = "where `"$path`""
 	$foundPath = Invoke-Expression $command
 	if(-not ($?)) {
-		Write-Output ("Couldn't find $path!")
+		Write-Output "Couldn't find $path!"
 		$canContinue = $false
 	}
 	else {
-		Write-Output ("Found $path at $foundPath")
+		Write-Output "Found $path at $foundPath"
 	}
 }
 #If not, fail here
@@ -63,7 +63,7 @@ $needToBuildPdCurses = $false
 foreach($f in $pdCursesFiles) {
 	$filePath = "$scriptPath\..\pdcurses\$f"
 	if(-not (Test-Path $f)) {
-		Write-Output ("Missing PDCurses file $filePath, will need to rebuild")
+		Write-Output "Missing PDCurses file $filePath, will need to rebuild"
 		$needToBuildPdCurses = $true
 		break
 	}
@@ -117,23 +117,23 @@ function invoke-build-project($solutionAbsolutePath, $taskString, $configString)
 
 function build-project-native($taskString, $configString) {
 	$solutionPath = [string](Resolve-Path $scriptPath\..\CursesSharp.Native.sln)
-	return invoke-build-project($solutionPath, $taskString, $configString)
+	return invoke-build-project $solutionPath $taskString $configString
 }
 
 function build-project-cli($taskString, $configString) {
 	$solutionPath = [string](Resolve-Path $scriptPath\..\CursesSharp.sln)
-	return invoke-build-project($solutionPath, $taskString, $configString)
+	return invoke-build-project $solutionPath $taskString $configString
 }
 
 # Clean native assemblies
-build-project-native("Clean", "Release")
-build-project-native("Clean", "Debug")
+build-project-native "Clean" "Release"
+build-project-native "Clean" "Debug"
 # Build native assemblies
-build-project-native("Build", "Release")
-build-project-native("Build", "Debug")
+build-project-native "Build" "Release"
+build-project-native "Build" "Debug"
 # Clean CLI assemblies
-build-project-cli("Clean", "Release")
-build-project-cli("Clean", "Debug")
+build-project-cli "Clean" "Release"
+build-project-cli "Clean" "Debug"
 # Build CLI assemblies
-build-project-cli("Build", "Release")
-build-project-cli("Build", "Debug")
+build-project-cli "Build" "Release"
+build-project-cli "Build" "Debug"
