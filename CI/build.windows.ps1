@@ -115,12 +115,12 @@ function invoke-build-project($solutionAbsolutePath, $taskString, $configString)
 }
 
 function build-project-native($taskString, $configString) {
-	$solutionPath = Resolve-Path $scriptPath\..\CursesSharp.Native.sln
+	$solutionPath = [string](Resolve-Path $scriptPath\..\CursesSharp.Native.sln)
 	return invoke-build-project($solutionPath, $taskString, $configString)
 }
 
 function build-project-cli($taskString, $configString) {
-	$solutionPath = Resolve-Path $scriptPath\..\CursesSharp.sln
+	$solutionPath = [string](Resolve-Path $scriptPath\..\CursesSharp.sln)
 	return invoke-build-project($solutionPath, $taskString, $configString)
 }
 
