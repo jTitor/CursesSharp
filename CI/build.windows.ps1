@@ -107,6 +107,7 @@ if($needToBuildPdCurses) {
 Write-Output "Building CursesSharp assemblies"
 function invoke-build-project($solutionAbsolutePath, $taskString, $configString) {
 	$invocation = "dotnet msbuild `"$solutionAbsolutePath`" /t:$taskString /p:Configuration=$configString"
+	Write-Output "Invoke-Build-Project: $invocation"
 	Invoke-Expression $invocation
 	if(-not($?)) {
 		Write-Output "Build request '$invocation' failed, can't continue"
