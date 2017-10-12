@@ -108,8 +108,8 @@ Write-Output "Building CursesSharp assemblies"
 function invoke-build-project($solutionAbsolutePath, $taskString, $configString) {
 	$invocation = "dotnet msbuild `"$solutionAbsolutePath`" /t:$taskString /p:Configuration=$configString"
 	$solutionDir = (Get-Item $solutionAbsolutePath).DirectoryName
-	Write-Output "cmd: cmd /C `"`"$vsVarsAllPath`" $vsVarsAllFlags & cd `"$solutionDir`" & $invocation`""
-	cmd /C `"`"$vsVarsAllPath`" $vsVarsAllFlags "&" cd `"$solutionDir`" "&" $invocation`"
+	Write-Output "cmd: cmd /C `"`"$vsVarsAllPath`" $vsVarsAllFlags && cd `"$solutionDir`" && $invocation`""
+	cmd /C "`"$vsVarsAllPath`" $vsVarsAllFlags && cd `"$solutionDir`" && $invocation"
 	if(-not($?)) {
 		Write-Output "Build request '$invocation' failed, can't continue"
 		return 1
